@@ -1,0 +1,8 @@
+<!-- custom_badge_layout.xml -->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Custom Badge"
+    android:textColor="@android:color/white"
+    android:background="@color/illegalLevel3"/>

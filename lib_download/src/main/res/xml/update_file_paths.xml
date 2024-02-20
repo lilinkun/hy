@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <files-path
+        name="files-path"
+        path="." />
+    <external-path
+        name="external-path"
+        path="." />
+    <external-path
+        name="files_path"
+        path="pingyi/" />
+    <external-path
+        name="files_path"
+        path="COMMUNICATION/" />
+</paths>

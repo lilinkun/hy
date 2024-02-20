@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/dp15">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp10"
+        android:visibility="gone"
+        />
+
+    <com.communication.lib_core.TextViewYH
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/icon"
+        android:textColor="@color/controller_bg"
+        android:textSize="14sp" />
+
+    
+
+    <com.communication.lib_core.TextViewYH
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/grey_dark"
+        android:textSize="13sp"
+        app:drawableEndCompat="@drawable/ic_more" />
+
+    <ImageView
+        android:id="@+id/iv_circle"
+        android:layout_width="@dimen/dp10"
+        android:layout_height="@dimen/dp10"
+        android:layout_toStartOf="@+id/content"
+        android:src="@drawable/shape_circular_bg_red"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
+</RelativeLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Py.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+
+    <style name="Py.Card.Button" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dp5</item>
+        <item name="cornerSizeTopRight">@dimen/dp5</item>
+        <item name="cornerSizeBottomRight">@dimen/dp5</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp5</item>
+    </style>
+
+    <style name="Py.Card" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dp8</item>
+        <item name="cornerSizeTopRight">@dimen/dp8</item>
+        <item name="cornerSizeBottomRight">@dimen/dp8</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp8</item>
+    </style>
+
+
+    <style name="Py.Card.Apps" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dp14</item>
+        <item name="cornerSizeTopRight">@dimen/dp14</item>
+        <item name="cornerSizeBottomRight">@dimen/dp14</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp14</item>
+    </style>
+
+    <style name="Py.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="Py.Blue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
+    </style>
+
+    <style name="search">
+        <item name="drawableStartCompat">@drawable/ic_search</item>
+        <item name="android:drawablePadding">@dimen/dp10</item>
+        <item name="android:paddingStart">@dimen/dp10</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:hint">@string/contact_search</item>
+        <item name="android:background">@drawable/shape_search_bg</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+
+    <style name="Py.Avatar" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dp45</item>
+        <item name="cornerSizeTopRight">@dimen/dp45</item>
+        <item name="cornerSizeBottomRight">@dimen/dp45</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp45</item>
+    </style>
+
+
+    <style name="popup_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+
+    <!-- 图片选择对话框Style-->
+    <style name="popup_dialog_anim" parent="@style/popup_dialog">
+        <item name="android:windowAnimationStyle">@style/dialog_animations</item>
+    </style>
+
+    <style name="dialog_animations">
+        <item name="android:windowEnterAnimation">@anim/slide_in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_from_bottom</item>
+    </style>
+
+
+    <style name="Hyong.Tab.Xxcy" parent="Widget.MaterialComponents.TabLayout.Colored">
+        <item name="android:background">@color/white</item>
+        <item name="tabIndicatorColor">@color/v_code_bg</item>
+        <item name="tabIndicatorFullWidth">@dimen/dp8</item>
+        <item name="tabIndicatorGravity">bottom</item>
+        <item name="tabTextColor">@color/controller_bg</item>
+        <item name="tabSelectedTextColor">@color/grey_dark</item>
+        <item name="tabTextAppearance">@style/TabLayoutTextSizeXxcy</item>
+    </style>
+
+
+    <style name="TabLayoutTextSizeXxcy">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="CustomTabText">
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+</resources>

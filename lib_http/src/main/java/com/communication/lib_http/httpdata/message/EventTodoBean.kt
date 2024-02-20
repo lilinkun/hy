@@ -1,0 +1,31 @@
+package com.communication.lib_http.httpdata.message
+
+data class EventTodoBean(
+    val assignDept: String,
+    val assignTime: String,
+    val assigner: String,
+    val eventCause: String,
+    val eventCauseName: String,
+    val eventDescription: String,
+    val eventDirection: String,
+    val eventDirectionName: String,
+    val eventId: String,
+    val eventLatitude: Any,
+    val eventLocation: String,
+    val eventLongitude: Any,
+    val eventSource: String,
+    val eventSourceName: String,
+    val eventStatus: String,
+    val eventStatusName: String,
+    val eventType: String,
+    val eventTypeName: String,
+    val executeStatus: String,
+    val executeStatusName: String,
+    val id: Int,
+    val influenceLane: Any,
+    val orderDesc: String,
+    val readFlag: String,
+    val reportedBy: String,
+    val reportedTime: String,
+    val imgUrl : String
+)

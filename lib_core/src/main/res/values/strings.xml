@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">衡永数字高速度</string>
+
+    <string name="login">登录</string>
+    <string name="login_account_hint">请输入手机号</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="login_verify_hint">请输入验证码</string>
+    <string name="error_fun_empty">功能暂未提供</string>
+
+    <!--通用-->
+    <string name="sure">确定</string>
+    <string name="exit">退出</string>
+    <string name="uncomplete">未完成</string>
+    <string name="complete">已完成</string>
+    <string name="save">保存</string>
+    <string name="input">提交</string>
+    <string name="contact_search">搜索联系人</string>
+
+
+    <!--首页-->
+    <string name="main_home">首页</string>
+    <string name="main_contacts">通讯录</string>
+    <string name="main_message">消息</string>
+    <string name="main_me">我的</string>
+
+    <!--通讯录-->
+    <string name="contact_org">组织架构</string>
+    <string name="contact_detail">联系人详情</string>
+    <string name="contact_phone">拨打电话</string>
+    <string name="contact_message">发送短信</string>
+    <string name="contact_copy">复制号码</string>
+    <string name="send_message">发送短信</string>
+    <string name="contact_unuser">部门暂未开通</string>
+
+    <!--消息-->
+    <string name="center_message">消息中心</string>
+    <string name="event_style">事件类型:</string>
+    <string name="all_read_hint">全部设置为已读</string>
+    <string name="no_read_message">没有未读信息</string>
+
+
+    <!-- 我的-->
+    <string name="me_logout">退出登录</string>
+    <string name="me_logout_confirm">确定退出登录？</string>
+    <string name="me_info">个人信息</string>
+    <string name="me_info_avatar">头像</string>
+    <string name="me_info_name">姓名</string>
+    <string name="me_info_phone">手机号</string>
+    <string name="me_info_sex">性别</string>
+    <string name="me_info_type">人员属性</string>
+    <string name="me_info_notes">备注</string>
+    <string name="me_info_organization">部门</string>
+    <string name="me_info_job">岗位</string>
+    <string name="me_info_username">用户</string>
+    <string name="me_info_job_number">工号</string>
+    <string name="me_change_pwd">修改密码</string>
+    <string name="me_about">关于我们</string>
+    <string name="username_tip">用户名: </string>
+
+    <!--关于我们-->
+    <string name="about_inspect_version">检查新版本</string>
+    <string name="about_copyright">Copyright © 2022-2032 湖南交通科学研究院有限公司</string>
+    <string name="update_version_title">发现新版本</string>
+    <string name="update_version_cancel">下次再说</string>
+    <string name="update_version_confirm">立即升级</string>
+    <string name="update_version_prepare">准备下载</string>
+    <string name="update_version_download">下载进度</string>
+    <string name="update_version_code">最新版本号：%s\n</string>
+    <string name="update_version_apk_size">安装包大小：%s\n</string>
+    <string name="update_version_content">更新内容：\n%s</string>
+    <string name="update_version_latest">已经是最新版本</string>"
+
+    <!--修改密码-->
+    <string name="psd_old">原密码</string>
+    <string name="psd_new">新密码</string>
+    <string name="psd_sure_new">确认密码</string>
+    <string name="hint_input_psd_old">请输入原密码</string>
+    <string name="hint_input_psd_new">请输入新密码</string>
+    <string name="hint_input_psd_sure_new">请再次输入新密码</string>
+    <string name="tv_important">*</string>
+    <string name="tv_tip">6-20位，且至少包含数字、字母、字符中</string>
+
+
+    <string name="location_title">开启定位</string>
+    <string name="location_message">地图需要您的位置信息，请打开定位功能</string>
+    <string name="location_ok">马上开启</string>
+    <string name="location_cancel">下次再说</string>
+
+
+    <!--事件-->
+    <string name="instruct">指令</string>
+
+
+    <!--修改手机号-->
+    <string name="change_phone">修改手机号</string>
+    <string name="change_phone_tip">请完成以下认证</string>
+    <string name="change_phone_message">收到的短信验证码</string>
+
+    <string name="digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$%^&amp;*()_-+=&lt;?/.,></string>
+
+</resources>

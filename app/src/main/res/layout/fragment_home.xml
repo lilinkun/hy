@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="homeFlow"
+            type="com.communication.lib_http.httpdata.home.HomeFlowBean" />
+
+
+    </data>
+
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<com.communication.lib_core.TextViewYH
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_home"
+            android:textSize="@dimen/dp24"
+            android:textColor="@color/black_main_text"/>-->
+
+        <com.communication.lib_core.PyMainTitle
+            android:id="@+id/title_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:py_title_main_name="@string/main_home"
+            app:py_title_main_text_size="24" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_home"
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginEnd="@dimen/dp16"
+            android:background="@mipmap/ic_home_card"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/dp20"
+            android:paddingEnd="@dimen/dp20">
+
+            <LinearLayout
+                android:id="@+id/ll_total_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp34"
+                android:orientation="vertical">
+
+                <com.communication.lib_core.TextViewYH
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(homeFlow.cumulativeTraffic)}"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+
+                <com.communication.lib_core.TextViewYH
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日总流量(辆)"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_history_minimum_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_total_flow"
+                android:layout_marginTop="@dimen/dp30"
+                android:layout_marginBottom="@dimen/dp30"
+                android:orientation="vertical">
+
+                <com.communication.lib_core.TextViewYH
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@{String.valueOf(homeFlow.historyLowestVehicle)}"
+                    android:textSize="20sp" />
+
+                <com.communication.lib_core.TextViewYH
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史最低流量(辆)"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_history_max_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ll_history_minimum_flow"
+                android:layout_alignBottom="@+id/ll_history_minimum_flow"
+                android:layout_marginStart="@dimen/dp40"
+                android:layout_toEndOf="@+id/ll_history_minimum_flow"
+                android:orientation="vertical">
+
+                <com.communication.lib_core.TextViewYH
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@{String.valueOf(homeFlow.historyHighestVehicle)}"
+                    android:textSize="20sp" />
+
+                <com.communication.lib_core.TextViewYH
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史最高流量(辆)"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/app_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_home"
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginEnd="@dimen/dp16"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_home_apps" />
+
+
+        <!--<com.communication.lib_core.TextViewYH
+            android:id="@+id/tv_jump_third_app"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/app_list"
+            android:text="跳到巧虎app"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp20"
+            />-->
+
+
+
+        <com.communication.lib_core.PyLoad
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+</layout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/white</color>
+    <color name="colorAccent">@color/white</color>
+
+    <color name="bg_grey">#F6F8F9</color>
+    <color name="divider">#EFEFEF</color>
+    <color name="divider_dark">#E0E0E0</color>
+
+    <color name="black_main_text">#0D1726</color>
+
+    <color name="green">#68BB08</color>
+    <color name="green_checkin">#7EE96B</color>
+    <color name="green_selected">#36C626</color>
+    <color name="blue">#4ba1f9</color>
+    <color name="blue_notice">#4ba1f9</color>
+    <color name="blue_resend">#6FB2F6</color>
+    <color name="blue_light">#E2F3FD</color>
+    <color name="blue_light2">#F5F7FA</color>
+    <color name="red">#F85E3E</color>
+    <color name="red_light">#FF7B7D</color>
+    <color name="check_in_orange">#FD9840</color>
+    <color name="grey_shape">#B0B0B0</color>
+    <color name="blue_shape">#108EE9</color>
+    <color name="purple">#BB79D2</color>
+    <color name="purple2">#6B73FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_transparent">#BBFFFFFF</color>
+    <color name="white_light">#FDFDFD</color>
+    <color name="transparent">#00000000</color>
+    <color name="vector">#A8A7A7</color>
+
+    <color name="black">#101010</color>
+    <color name="grey_dark">#333333</color>
+    <color name="grey_normal">#525366</color>
+    <color name="grey_light">#999999</color>
+    <color name="grey_light2">#a9a9a9</color>
+    <color name="grey_dialog_divider">#EAE9E9</color>
+    <color name="photo_default">#DCDBDB</color>
+    <color name="grey_line">#D2D2D2</color>
+    <color name="tv_important">#FF3939</color>
+
+    <color name="btn_blue_light">#FF86a7bf</color>
+    <color name="btn_son_step_grey">#FFa9a9a9</color>
+    <color name="btn_son_step_bule">#FF6FB2F6</color>
+    <color name="person_name">#586B90</color>
+
+    <color name="icActive">#FFFFFFFF</color>
+    <color name="icFocused">#DDFFFFFF</color>
+    <color name="icPressed">#AAFFFFFF</color>
+
+    <color name="level3_highlight">#14FA5151</color>
+    <color name="home_new_notice">#fa4032</color>
+
+    <color name="controller">#77101010</color>
+    <color name="controller_bg">#DD666666</color>
+
+    <color name="illegalLevel0">#FF0093FF</color>
+    <color name="illegalLevel1">#FFFFAE13</color>
+    <color name="illegalLevel2">#FFCD3E0D</color>
+    <color name="illegalLevel3">#FFF81F00</color>
+
+    <color name="main_color">#1B55E2</color>
+
+    <color name="black_msg">#242B3A</color>
+
+    <color name="blue_dark">#0051E8</color>
+    <color name="bg_line">#d7d7d7</color>
+
+    <color name="text_grey">#575d6c</color>
+    <color name="event_grey">#AEB0B9</color>
+
+    <color name="v_code_bg">#1070f8</color>
+
+    <color name="event_type">#01BFF5</color>
+    <color name="event_source">#00BB57</color>
+    <color name="event_status">#F89504</color>
+
+</resources>

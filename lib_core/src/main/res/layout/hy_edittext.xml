@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <com.communication.lib_core.TextViewYH
+        android:id="@+id/tv_important"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/ev_psd"
+        app:layout_constraintBottom_toBottomOf="@+id/ev_psd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_psd"
+        android:text="@string/tv_important"
+        android:paddingStart="10dp"
+        android:textSize="16sp"
+        android:textColor="@color/tv_important"
+        android:gravity="center_vertical"
+        />
+    <com.communication.lib_core.TextViewYH
+        android:id="@+id/tv_psd"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/ev_psd"
+        app:layout_constraintBottom_toBottomOf="@+id/ev_psd"
+        app:layout_constraintStart_toStartOf="@+id/tv_important"
+        app:layout_constraintEnd_toStartOf="@+id/ev_psd"
+        android:text="@string/psd_old"
+        android:paddingStart="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        />
+
+    <EditText
+        android:id="@+id/ev_psd"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textColor="@color/black_main_text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_psd_icon"
+        app:layout_constraintStart_toEndOf="@+id/tv_psd"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="@dimen/dp10"
+        android:gravity="center_vertical|end"
+        android:hint="@string/hint_input_psd_old"
+        android:digits="@string/digits"
+        android:background="@null"
+        android:inputType="textPassword"
+        />
+
+    <ImageView
+        android:id="@+id/iv_psd_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/ev_psd"
+        app:layout_constraintBottom_toBottomOf="@+id/ev_psd"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp16"
+        android:src="@drawable/ic_hidden_psd"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

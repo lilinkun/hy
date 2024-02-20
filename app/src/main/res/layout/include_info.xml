@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.communication.lib_http.httpdata.me.PersonInfoBean" />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/infoSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+            <com.communication.lib_core.PyTextViewRight
+                android:id="@+id/tv_infoSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:py_text_view_right_name="@string/me_info_sex"/>
+
+            <com.communication.lib_core.PyDividerAll
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"/>
+
+        </LinearLayout>
+
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_left_image="@mipmap/ic_me_phone"
+            app:py_text_view_right_name="@string/me_info_phone"/>
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp15"/>
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoOrganization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_left_image="@mipmap/ic_me_dept"
+            app:py_text_view_right_name="@string/me_info_organization" />
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp15"/>
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoJob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_left_image="@mipmap/ic_me_post"
+            app:py_text_view_right_name="@string/me_info_job" />
+
+
+
+
+        <LinearLayout
+            android:id="@+id/infoType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+            <com.communication.lib_core.PyTextViewRight
+                android:id="@+id/tv_infoType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:py_text_view_right_name="@string/me_info_type"/>
+
+            <com.communication.lib_core.PyDividerAll
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+            <com.communication.lib_core.PyTextViewRight
+                android:id="@+id/infoNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:py_text_view_right_name="@string/me_info_notes"/>
+
+            <com.communication.lib_core.PyDividerAll
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

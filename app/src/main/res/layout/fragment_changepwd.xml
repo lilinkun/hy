@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_grey"
+        >
+
+        <com.communication.lib_core.PyTitle
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:py_title_name="@string/me_change_pwd"
+            app:py_title_showBack="true"
+            app:py_next_text="@string/input"
+            ></com.communication.lib_core.PyTitle>
+
+        <!--<RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/ll_back"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                >
+
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="19dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+            <com.communication.lib_core.TextViewYH
+                android:id="@+id/tv_bind_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/me_change_pwd"
+                android:textColor="@color/black_main_text"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/dp16"
+                android:textSize="16sp"
+                android:layout_centerInParent="true"
+                />
+
+
+
+            <com.communication.lib_core.TextViewYH
+                android:id="@+id/tv_modify_save"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp16"
+                android:text="@string/save"
+                android:textColor="@color/blue_dark"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            >
+
+            <com.communication.lib_core.HyEditText
+                android:id="@+id/hy_psd_old"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp12"
+                app:hy_tv_name="@string/psd_old"
+                app:hy_ev_hint_name="@string/hint_input_psd_old"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.communication.lib_core.HyEditText
+                android:id="@+id/hy_psd_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp12"
+                app:hy_tv_name="@string/psd_new"
+                app:hy_ev_hint_name="@string/hint_input_psd_new"
+                app:layout_constraintTop_toBottomOf="@+id/hy_psd_old"
+                />
+
+
+            <ImageView
+                android:id="@+id/ic_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_tip"
+                app:layout_constraintTop_toBottomOf="@+id/hy_psd_new"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/dp10"
+                />
+
+            <com.communication.lib_core.TextViewYH
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/tv_tip"
+                android:layout_marginStart="2dp"
+                app:layout_constraintTop_toTopOf="@+id/ic_tip"
+                app:layout_constraintStart_toEndOf="@+id/ic_tip"
+                />
+
+
+            <com.communication.lib_core.HyEditText
+                android:id="@+id/hy_psd_sure_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16"
+                app:hy_tv_name="@string/psd_sure_new"
+                app:hy_ev_hint_name="@string/hint_input_psd_sure_new"
+                app:layout_constraintTop_toBottomOf="@+id/ic_tip"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/ic_tip_sure_psd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_tip"
+                app:layout_constraintTop_toBottomOf="@+id/hy_psd_sure_new"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/dp10"
+                />
+
+            <com.communication.lib_core.TextViewYH
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/tv_tip"
+                android:layout_marginStart="2dp"
+
+                app:layout_constraintTop_toTopOf="@+id/ic_tip_sure_psd"
+                app:layout_constraintStart_toEndOf="@+id/ic_tip_sure_psd"
+                />
+
+
+            <!--<com.communication.lib_core.TextViewYH
+                android:id="@+id/tv_psd_old"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@+id/ev_psd_old_value"
+                app:layout_constraintBottom_toBottomOf="@+id/ev_psd_old_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_psd_sure_new"
+                android:text="@string/psd_old"
+                android:paddingStart="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                />
+
+            <EditText
+                android:id="@+id/ev_psd_old_value"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black_main_text"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/hy_psd_sure_new"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_psd_old"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_input_psd_old"
+                android:digits="@string/digits"
+                android:background="@null"
+                android:inputType="textPassword"
+                />
+
+
+            <View
+                android:id="@+id/view_psd_old_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_psd_old"
+                />
+
+            <com.communication.lib_core.TextViewYH
+                android:id="@+id/tv_psd_new"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@+id/ev_psd_new_value"
+                app:layout_constraintBottom_toBottomOf="@+id/ev_psd_new_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_psd_sure_new"
+                android:text="@string/psd_new"
+                android:paddingStart="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                />
+
+            <EditText
+                android:id="@+id/ev_psd_new_value"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black_main_text"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/view_psd_old_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_psd_new"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_input_psd_new"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:digits="@string/digits"
+                />
+
+
+            <View
+                android:id="@+id/view_psd_new_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_psd_new"
+                />
+
+            <com.communication.lib_core.TextViewYH
+                android:id="@+id/tv_psd_sure_new"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@+id/ev_psd_sure_new_value"
+                app:layout_constraintBottom_toBottomOf="@+id/ev_psd_sure_new_value"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/psd_sure_new"
+                android:paddingStart="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                />
+
+            <EditText
+                android:id="@+id/ev_psd_sure_new_value"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black_main_text"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/view_psd_new_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_psd_sure_new"
+                android:digits="@string/digits"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_input_psd_sure_new"
+                android:background="@null"
+                android:inputType="textPassword"
+                />
+
+
+            <View
+                android:id="@+id/view_sure_new_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_psd_sure_new"
+                />-->
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

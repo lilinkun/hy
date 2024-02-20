@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp30"
+        android:layout_marginEnd="@dimen/dp30"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardPreventCornerOverlap="false"
+        app:shapeAppearanceOverlay="@style/Py.Card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.communication.lib_core.TextViewYH
+                android:id="@+id/titleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp45"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp1"
+                android:background="@color/divider" />
+
+            <com.communication.lib_core.TextViewYH
+                android:id="@+id/messageTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp20"
+                android:layout_marginBottom="@dimen/dp15"
+                android:gravity="start"
+                android:textColor="@color/grey_light"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/layoutConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:background="@color/grey_dialog_divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.communication.lib_core.TextViewYH
+                        android:id="@+id/negativeBn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp45"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_click"
+                        android:gravity="center"
+                        android:text="取消"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:id="@+id/columnLine"
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grey_dialog_divider" />
+
+                    <com.communication.lib_core.TextViewYH
+                        android:id="@+id/positiveBn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp45"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_click"
+                        android:gravity="center"
+                        android:text="确定"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp20"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:layout_marginBottom="@dimen/dp10">
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="@dimen/dp190"
+                        android:layout_height="@dimen/dp25"
+                        android:layout_gravity="center"
+                        android:focusable="true"
+                        android:max="100"
+                        android:progress="15"
+                        android:progressDrawable="@drawable/download_bg"
+                        android:splitTrack="false"
+                        android:thumb="@null" />
+
+                    <com.communication.lib_core.TextViewYH
+                        android:id="@+id/progressPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp22"
+                        android:gravity="center"
+                        android:text="55%"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.communication.lib_core.TextViewYH
+                        android:id="@+id/progressPrepare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/update_version_prepare"
+                        android:textColor="@color/grey_light"
+                        android:textSize="15sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressWait"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dp5"
+                        android:layout_toStartOf="@+id/progressPrepare"
+                        android:indeterminateTint="@color/grey_light2"
+                        android:indeterminateTintMode="src_atop" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

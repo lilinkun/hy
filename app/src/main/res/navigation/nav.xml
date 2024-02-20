@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment"
+    android:id="@+id/nav">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.communication.pingyi.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_personInfoFragment"
+            app:destination="@id/personInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_changePwdFragment"
+            app:destination="@id/changePwdFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_changePhoneFragment"
+            app:destination="@id/changePhoneFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_orgListFragment"
+            app:destination="@id/orgListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+        <action
+            android:id="@+id/action_mainFragment_to_contactSearchFragment"
+            app:destination="@id/contactSearchFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+        <action
+            android:id="@+id/action_mainFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+        <action
+            android:id="@+id/action_mainFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/personInfoFragment"
+        android:name="com.communication.pingyi.ui.me.info.PersonInfoFragment"
+        android:label="PersonInfoFragment"
+        tools:layout="@layout/fragment_info"
+        >
+
+        <argument
+            android:name="personal"
+            app:argType="string"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePwdFragment"
+        android:name="com.communication.pingyi.ui.me.changepwd.ChangePwdFragment"
+        android:label="ChangePwdFragment"
+        tools:layout="@layout/fragment_changepwd"
+        />
+
+    <fragment
+        android:id="@+id/changePhoneFragment"
+        android:name="com.communication.pingyi.ui.me.phone.ChangePhoneFragment"
+        android:label="ChangePhoneFragment"
+        tools:layout="@layout/fragment_change_phone"
+        />
+
+    <fragment
+        android:id="@+id/orgListFragment"
+        android:name="com.communication.pingyi.ui.contact.orglist.OrgListFragment"
+        android:label="OrgListFragment"
+        tools:layout="@layout/fragment_orglist"
+        >
+        <argument
+            android:name="id"
+            app:argType="string"/>
+        <argument
+            android:name="title"
+            app:argType="string"/>
+        <action
+                android:id="@+id/action_orgListFragment_to_contactDetailFragment"
+                app:destination="@id/contactDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" >
+        </action>
+
+
+        <action
+            android:id="@+id/action_orgListFragment_to_contactSearchFragment"
+            app:destination="@id/contactSearchFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactDetailFragment"
+        android:name="com.communication.pingyi.ui.contact.ContactDetail.ContactDetailFragment"
+        android:label="ContactDetailFragment"
+        tools:layout="@layout/fragment_contact_detail"
+        >
+
+        <argument
+            android:name="username"
+            app:argType="string"
+            />
+        <argument
+            android:name="phone"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="role"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="dept"
+            app:argType="string"
+            />
+
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactSearchFragment"
+        android:name="com.communication.pingyi.ui.contact.search.ContactSearchFragment"
+        android:label="ContactSearchFragment"
+        tools:layout="@layout/fragment_search"
+        >
+
+        <action
+            android:id="@+id/action_contactSearchFragment_to_contactDetailFragment"
+            app:destination="@id/contactDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" >
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.communication.pingyi.ui.me.about.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about"
+        >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.communication.pingyi.ui.webview.WebviewFragment"
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_about"
+        >
+
+        <argument
+            android:name="url"
+            app:argType="string"
+            />
+
+    </fragment>
+
+
+
+
+</navigation>

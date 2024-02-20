@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp50"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50"
+        >
+
+        <RelativeLayout
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/ic_back"
+                android:duplicateParentState="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_icon"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/dp15"
+                android:layout_height="@dimen/dp15"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp12"
+                android:background="@drawable/ic_search_dark"
+                android:duplicateParentState="true"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <com.communication.lib_core.TextViewYH
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_icon"
+            android:layout_toEndOf="@+id/btn_back"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="@color/grey_dark"
+            android:textSize="16sp" />
+
+        <com.communication.lib_core.TextViewYH
+            android:id="@+id/btnRight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp10"
+            android:paddingEnd="@dimen/dp10"
+            android:layout_marginTop="8.5dp"
+            android:layout_marginBottom="8.5dp"
+            android:layout_marginEnd="@dimen/dp16"
+            android:background="@drawable/bg_title_btn"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>

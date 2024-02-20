@@ -1,0 +1,97 @@
+ext{
+    app = [
+            compileSdkVersion: 31,
+            applicationId    : "com.communication.pingyi",
+            minSdkVersion    : 21,
+            targetSdkVersion : 31,
+            versionCode      : 1,
+            versionName      : "1.0.1",
+    ]
+
+    versions = [
+            koin            : "2.0.1",
+            coroutines      : "1.3.7",
+            retrofit2       : "2.9.0",
+            navigation      : "2.3.5",
+            glide           : "4.11.0",
+            lifecycle       : "2.2.0",
+            refresh         : "2.0.1",
+    ]
+
+    libs = [
+            stdlib                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20",
+
+
+            //https
+            loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:4.9.0",
+            gson                  : "com.google.code.gson:gson:2.8.6",
+            retrofit2ConverterGson: "com.squareup.retrofit2:converter-gson:${versions.retrofit2}",
+            retrofit2             : "com.squareup.retrofit2:retrofit:${versions.retrofit2}",
+
+
+            //coroutines
+            coroutinesCore        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}",
+            coroutinesAndroid     : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
+
+            //log
+            timber                : "com.jakewharton.timber:timber:4.7.1",
+
+
+            //kotlin dependency injection(koin)
+            koinAndroid           : "org.koin:koin-android:${versions.koin}",
+            koinScope             : "org.koin:koin-androidx-scope:${versions.koin}",
+            koinViewModel         : "org.koin:koin-androidx-viewmodel:${versions.koin}",
+            koinExt               : "org.koin:koin-androidx-ext:${versions.koin}",
+
+            //LiveEventBus
+            eventBus              : "com.jeremyliao:live-event-bus-x:1.7.2",
+
+            mmkv                  : "com.tencent:mmkv-static:1.2.4",
+
+
+            //image cache
+            glide                 : "com.github.bumptech.glide:glide:${versions.glide}",
+            glideCompiler         : "com.github.bumptech.glide:compiler:${versions.glide}",
+
+
+            refresh               : "com.scwang.smart:refresh-layout-kernel:${versions.refresh}",
+            refreshHeader         : "com.scwang.smart:refresh-header-material:${versions.refresh}",
+
+            filedownloader        : "com.liulishuo.filedownloader:library:1.7.7",
+
+            perm                  : "org.permissionsdispatcher:permissionsdispatcher:4.3.0",
+            permkap               : "org.permissionsdispatcher:permissionsdispatcher-processor:4.3.0",
+
+
+            luban                 : "top.zibin:Luban:1.1.8",
+
+            leakcanary            : "com.squareup.leakcanary:leakcanary-android:2.2"
+    ]
+
+    androidx = [
+
+            appcompat            : "androidx.appcompat:appcompat:1.2.0",
+            coreKtx              : "androidx.core:core-ktx:1.3.2",
+            navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
+            navigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.navigation}",
+            fragmentKtx          : "androidx.fragment:fragment-ktx:1.2.5",
+            constraintlayout     : "androidx.constraintlayout:constraintlayout:2.0.2",
+
+            //lifecycle
+            lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",
+            lifecycleLivedataKtx : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}",
+            lifecycleViewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
+
+    ]
+
+    test = [
+            junit: "junit:junit:4.13.2",
+    ]
+
+    androidTest = [
+            junit       : "androidx.test.ext:junit:1.1.2",
+            espressoCore: "androidx.test.espresso:espresso-core:3.3.0",
+    ]
+
+
+}

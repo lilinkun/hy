@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.communication.lib_http.httpdata.me.PersonInfoBean" />
+
+
+    </data>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_grey"
+    android:orientation="vertical">
+
+    <com.communication.lib_core.PyTitle
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:py_title_name="@string/me_info" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dp15"
+            android:paddingRight="@dimen/dp15">
+
+            <com.communication.lib_core.TextViewYH
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/me_info_avatar"
+                android:textSize="14sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_avatar"
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:shapeAppearanceOverlay="@style/Py.Avatar">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15" />
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_right_name="@string/me_info_sex"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:visibility="gone" />
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_right_icon_show="false"
+            app:py_text_view_right_content="asdasd"
+            app:py_text_view_right_name="@string/me_info_name" />
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoJobNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_right_name="@string/me_info_job_number"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_right_name="@string/me_info_phone"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoOrganization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_text_view_right_name="@string/me_info_organization"
+            android:visibility="gone"/>
+
+        <com.communication.lib_core.PyDividerAll
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15" />
+
+        <com.communication.lib_core.PyTextViewRight
+            android:id="@+id/infoUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:py_right_icon_show="false"
+            app:py_text_view_right_content="asdasd"
+            app:py_text_view_right_name="@string/me_info_username" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</layout>

@@ -1,0 +1,130 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.communication.pingyi"
+        minSdk 21
+        targetSdk 31
+        versionCode 7
+        versionName "1.0.2"
+
+
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY  : "5180defb0e1e34d9fbc36117",//值来自开发者平台取得的AppKey
+                JPUSH_CHANNEL : "default_developer",
+
+                //meizu_config_start
+                MEIZU_APPKEY  : "MZ-魅族的APPKEY",
+                MEIZU_APPID   : "MZ-魅族的APPID",
+                //meizu_config_end
+                //xiaomi_config_start
+                XIAOMI_APPID  : "MI-小米的APPID",
+                XIAOMI_APPKEY : "MI-小米的APPKEY",
+                //xiaomi_config_end
+                //oppo_config_start
+                OPPO_APPKEY   : "OP-oppo的APPKEY",
+                OPPO_APPID    : "OP-oppo的APPID",
+                OPPO_APPSECRET: "OP-oppo的APPSECRET",
+                //oppo_config_end
+                //vivo_config_start
+                VIVO_APPKEY   : "vivo的APPKEY",
+                VIVO_APPID    : "vivo的APPID",
+                //vivo_config_end
+
+
+        ]
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean","LOG_DEBUG","true"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    implementation rootProject.libs.stdlib
+    implementation rootProject.androidx.coreKtx
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation rootProject.androidx.constraintlayout
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation rootProject.androidx.fragmentKtx
+    implementation rootProject.androidx.navigationFragmentKtx
+    implementation rootProject.androidx.navigationUIKtx
+
+    //add Log
+    implementation rootProject.libs.timber
+
+    //add coroutines
+    implementation rootProject.libs.coroutinesCore
+    implementation rootProject.libs.coroutinesAndroid
+
+    //add kotlin dependency injection(koin)
+    implementation rootProject.libs.koinAndroid
+    implementation rootProject.libs.koinScope
+    implementation rootProject.libs.koinViewModel
+    implementation rootProject.libs.koinExt
+
+    implementation rootProject.libs.eventBus
+
+    implementation rootProject.libs.luban
+
+    //add refresh
+    implementation rootProject.libs.refresh         //核心必须依赖
+    implementation rootProject.libs.refreshHeader    //经典加载
+
+    //add image cache
+    implementation rootProject.libs.glide
+    kapt rootProject.libs.glideCompiler
+
+
+    implementation rootProject.libs.perm
+    kapt rootProject.libs.permkap
+
+//    debugImplementation rootProject.libs.leakcanary
+    api 'cn.rongcloud.sdk:im_kit:5.6.3' // 即时通讯 UI 基础组件
+    api 'cn.rongcloud.sdk:sight:5.6.3' // 小视频
+    api 'cn.rongcloud.sdk:call_lib:5.6.3' // 音视频呼叫能力库（内含 rtc_lib)
+    api 'cn.rongcloud.sdk:call_kit:5.6.3' // 音视频通话能力 UI 组件
+    //json解析
+    api 'com.google.code.gson:gson:2.8.2'
+
+    implementation project(":lib_http")
+    implementation project(":lib_core")
+    implementation project(":jiguang")
+    implementation project(":lib_download")
+}

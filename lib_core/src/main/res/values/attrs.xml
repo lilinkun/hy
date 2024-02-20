@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PyButton">
+        <attr name="py_button_name" format="string" />
+        <attr name="py_bg_color" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="PyTitle">
+        <attr name="py_title_name" format="string" />
+        <attr name="py_title_showBack" format="boolean" />
+        <attr name="py_next_text" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="PyMainTitle">
+        <attr name="py_title_main_name" format="string" />
+        <attr name="py_title_main_right_icon" format="reference" />
+        <attr name="py_title_main_text_size" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="PyTextViewRight">
+        <attr name="py_text_view_right_name" format="string" />
+        <attr name="py_text_view_right_content" format="string" />
+        <attr name="py_text_view_left_image" format="reference" />
+        <attr name="py_right_icon_show" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="HyEditText">
+        <attr name="hy_tv_name" format="string"></attr>
+        <attr name="hy_ev_hint_name" format="string"></attr>
+        <attr name="hy_img_icon" format="reference"></attr>
+    </declare-styleable>
+</resources>

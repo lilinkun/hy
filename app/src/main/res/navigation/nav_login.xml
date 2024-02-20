@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/spalashFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/spalashFragment"
+        android:name="com.communication.pingyi.ui.login.spalash.SpalashFragment"
+        android:label="SpalashFragment"
+        >
+
+        <argument
+            android:defaultValue="false"
+            android:name="relogin"
+            app:argType="boolean"
+            />
+
+        <action
+            android:id="@+id/action_spalashFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            />
+
+        <action
+            android:id="@+id/action_spalashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.communication.pingyi.ui.login.welcome.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome"
+        >
+
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            />
+
+
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.communication.pingyi.ui.login.account.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"
+        >
+
+    </fragment>
+
+
+</navigation>
