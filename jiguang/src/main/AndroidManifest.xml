@@ -122,7 +122,7 @@
             android:exported="false" />
 
         <!-- 3.6.7 新增，用于负反馈组件 -->
-        <service android:name="cn.jpush.android.service.MessagingIntentService" />
+<!--        <service android:name="cn.jpush.android.service.MessagingIntentService" />-->
 
         <!-- since 3.0.9 Required SDK 核心功能 -->
         <provider

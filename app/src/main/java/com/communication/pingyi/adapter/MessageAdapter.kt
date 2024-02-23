@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_http.httpdata.message.EventTodoBean
 import com.communication.pingyi.databinding.ItemMessageBinding
+import com.jeremyliao.liveeventbus.LiveEventBus
 
 class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(MessageDiffCallback()) {
 
@@ -44,13 +46,13 @@ class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(Messag
 //                }else{
 //                    ivCircle.visibility = View.GONE
 //                }
-//                setClickListener {
+                setClickListener {
 //                    if (checkDoubleClick()) {
 //                        if(item.isRead == 0) {
 //                            LiveEventBus.get(EVENTBUS_MESSAGE_ITEM_CLICK).post(item.id.toString())
 //                        }
-//                        LiveEventBus.get(EVENTBUS_MESSAGE_CLICK).post(item.serialNumber)
-//                    }
+                        LiveEventBus.get(EVENTBUS_MESSAGE_CLICK).post(item.eventId)
+                    }
 //                }
                 executePendingBindings()
             }

@@ -20,9 +20,11 @@
         <activity
             android:name="ui.UpdateAppActivity"
             android:launchMode="singleTask"
-            android:theme="@style/DialogActivityTheme" />
+            android:theme="@style/DialogActivityTheme"
+            android:exported="false"  />
 
-        <service android:name="update.UpdateAppService" />
+        <service android:name="update.UpdateAppService"
+            android:exported="false"  />
 
         <provider
             android:name="update.UpdateFileProvider"

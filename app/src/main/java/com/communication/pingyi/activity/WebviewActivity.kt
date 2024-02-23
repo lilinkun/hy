@@ -22,6 +22,7 @@ import com.communication.lib_core.tools.GPSUtils
 import com.communication.pingyi.R
 import com.communication.pingyi.base.BaseActivity
 import com.communication.pingyi.ext.pyToastShort
+import com.communication.pingyi.tools.AndroidActivityJavascriptInterface
 import com.communication.pingyi.tools.AndroidJavascriptInterface
 import com.communication.pingyi.tools.PhotoUtils
 import com.tencent.smtt.sdk.CacheManager
@@ -151,7 +152,7 @@ class WebviewActivity : BaseActivity() {
         settings.cacheMode = WebSettings.LOAD_NO_CACHE
         settings.databaseEnabled = true
         settings.setSupportZoom(false)
-        webView.addJavascriptInterface(AndroidJavascriptInterface(this), "Android")
+        webView.addJavascriptInterface(AndroidActivityJavascriptInterface(this@WebviewActivity), "Android")
         webView.isHorizontalScrollBarEnabled = false
         webView.isVerticalScrollBarEnabled = false
         webView.webChromeClient = webViewChromeClient

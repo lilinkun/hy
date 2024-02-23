@@ -55,7 +55,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             String::class.java
         ).observe(this,{ key->
             key?.let {
-                goToWebActivity(WEB_MESSAGE+it)
+                goToWebActivity(WEB_MESSAGE+it + "&flag=false")
             }
         })
 
