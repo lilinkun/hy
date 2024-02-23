@@ -22,13 +22,13 @@ class AlarmAdapter : ListAdapter<AlarmTodoBean, RecyclerView.ViewHolder>(AlarmDi
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val app = getItem(position)
-        (holder as PyViewHolder).bind(app, position)
+        (holder as PyViewHolder).bind(app)
     }
 
     class PyViewHolder(
         private val binding: ItemAlarmBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AlarmTodoBean, position: Int) {
+        fun bind(item: AlarmTodoBean) {
             binding.apply {
                 message = item
                 executePendingBindings()

@@ -57,29 +57,34 @@ class OrgListFragment : BaseFragment<FragmentOrglistBinding>(){
         LiveEventBus.get(
             EVENTBUS_CONTACT_USER_CLICK,
             ContactUserBean::class.java
-        ).observe(this,{
+        ).observe(this) {
 
             //注意必须是javaObjectType，要不会被擦除泛型
             val bean = Gson().toJson(it)
 
-            val dir = OrgListFragmentDirections.actionOrgListFragmentToContactDetailFragment(it.userName,it.phoneNumber,bean,it.dept.deptName)
+            val dir = OrgListFragmentDirections.actionOrgListFragmentToContactDetailFragment(
+                it.userName,
+                it.phoneNumber,
+                bean,
+                it.dept.deptName
+            )
             findNavController().navigate(dir)
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_CONTACT_ORG_CLICK,
             ContactItem::class.java
-        ).observe(this,{
+        ).observe(this){
             mViewModel.getContactUser(it.id.toString())
             contactItems.removeAt(contactItems.indexOf(it)+1)
             mContactOrgAdapter.notifyDataSetChanged()
-        })
+        }
 
 
         LiveEventBus.get(
             EVENTBUS_CONTACT_CLICK,
             ContactItem::class.java
-        ).observe(this,{
+        ).observe(this){
             if (isActive()) {
                 if (it.size > 0) {
                     contactItems.add(it)
@@ -89,7 +94,7 @@ class OrgListFragment : BaseFragment<FragmentOrglistBinding>(){
                     pyToast("部门暂未开通")
                 }
             }
-        })
+        }
 
 
     }
@@ -138,23 +143,15 @@ class OrgListFragment : BaseFragment<FragmentOrglistBinding>(){
             org_user.observe(viewLifecycleOwner){
 
                 org_user.value?.apply {
-                    if (it.trees != null){
-                        orgList = it.trees
-                        binding.rvContactItem.visibility = View.VISIBLE
-                        mContactItemAdapter.submitList(orgList)
-                        mContactItemAdapter.notifyDataSetChanged()
-                    }else{
-                        binding.rvContactItem.visibility = View.GONE
-                    }
+                    orgList = it.trees
+                    binding.rvContactItem.visibility = View.VISIBLE
+                    mContactItemAdapter.submitList(orgList)
+                    mContactItemAdapter.notifyDataSetChanged()
 
-                    if (it.users != null) {
-                        userList = it.users
-                        binding.rvContactUserItem.visibility = View.VISIBLE
-                        mContactUserAdapter.submitList(userList)
-                        mContactUserAdapter.notifyDataSetChanged()
-                    }else{
-                        binding.rvContactUserItem.visibility = View.GONE
-                    }
+                    userList = it.users
+                    binding.rvContactUserItem.visibility = View.VISIBLE
+                    mContactUserAdapter.submitList(userList)
+                    mContactUserAdapter.notifyDataSetChanged()
                 }
 
 

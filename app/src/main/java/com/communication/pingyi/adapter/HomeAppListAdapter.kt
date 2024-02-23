@@ -76,7 +76,7 @@ class HomeAppListAdapter : ListAdapter<AppsItem, RecyclerView.ViewHolder>(AppIte
                 }
                 setClickListener {
                     if (checkDoubleClick()) {
-                        if(url.isNullOrEmpty()) {
+                        if(url.isEmpty()) {
                             binding.root.context?.let {
                                 pyToast(it.getString(R.string.error_fun_empty))
                             }

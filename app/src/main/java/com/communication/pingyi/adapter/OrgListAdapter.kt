@@ -4,16 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.databinding.adapters.ViewBindingAdapter.setClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.communication.lib_core.checkDoubleClick
-import com.communication.lib_core.tools.EVENTBUS_CONTACT_CLICK
 import com.communication.lib_core.tools.EVENTBUS_CONTACT_ORG_CLICK
 import com.communication.lib_http.httpdata.contact.ContactItem
 import com.communication.pingyi.R
-import com.communication.pingyi.databinding.ItemContactBinding
 import com.communication.pingyi.databinding.ItemContactOrgBinding
 import com.jeremyliao.liveeventbus.LiveEventBus
 

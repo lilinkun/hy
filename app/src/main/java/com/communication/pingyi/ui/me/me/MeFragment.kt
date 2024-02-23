@@ -10,7 +10,6 @@ import com.communication.lib_core.PyAppDialog
 import com.communication.lib_core.checkDoubleClick
 import com.communication.lib_core.tools.EVENTBUS_LOGIN_SUCCESS
 import com.communication.lib_core.tools.EVENTBUS_LOGOUT_SUCCESS
-import com.communication.lib_core.tools.Utils
 import com.communication.lib_http.base.MMKVTool
 import com.communication.lib_http.httpdata.me.PersonInfoBean
 import com.communication.pingyi.R
@@ -44,24 +43,24 @@ class MeFragment : BaseFragment<FragmentMeBinding>(), OnRefreshListener {
         LiveEventBus.get(
             EVENTBUS_LOGOUT_SUCCESS,
             Boolean :: class.java
-        ).observe(this,{
+        ).observe(this){
             if (lifecycle.currentState == Lifecycle.State.RESUMED){
                 if (it){
                     logoutConfirm()
                 }
             }
-        })
+        }
 
 
         LiveEventBus.get(
             EVENTBUS_LOGIN_SUCCESS,
             Boolean::class.java
-        ).observe(this,{
+        ).observe(this){
 
             if(it) {
                 meViewModel.getInfo()
             }
-        })
+        }
 
         meViewModel.getInfo()
 

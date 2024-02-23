@@ -1,6 +1,5 @@
 package com.communication.pingyi.ui.webview
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -29,7 +28,6 @@ import com.communication.pingyi.R
 import com.communication.pingyi.base.AppContext.getSystemService
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentWebviewBinding
-import com.communication.pingyi.ext.pyToast
 import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.tools.AndroidJavascriptInterface
 import com.communication.pingyi.tools.PhotoUtils
@@ -58,13 +56,13 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LiveEventBus.get(EVENTBUS_EVENT_BACK,Boolean::class.java).observe(this,{
-            if(it){
-                if (webview.canGoBack()){
-                    webview.goBack();
+        LiveEventBus.get(EVENTBUS_EVENT_BACK,Boolean::class.java).observe(this) {
+            if (it) {
+                if (webview.canGoBack()) {
+                    webview.goBack()
                 }
             }
-        })
+        }
     }
 
     override fun initView() {
@@ -144,18 +142,19 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(){
         webview = binding.webView
 
         val settings = webview.settings
         settings.javaScriptEnabled = true
-        settings.javaScriptCanOpenWindowsAutomatically = true
         //自适应屏幕
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
-//        settings.loadWithOverviewMode = true
-//        settings.domStorageEnabled = true
-//        settings.databaseEnabled = true
-//        settings.setSupportZoom(false)
+        settings.loadWithOverviewMode = true
+        settings.domStorageEnabled = true
+        settings.databaseEnabled = true
+        settings.javaScriptCanOpenWindowsAutomatically = true
+        settings.setSupportZoom(false)
         webview.addJavascriptInterface(AndroidJavascriptInterface(requireActivity().applicationContext), "Android")
         webview.webViewClient = webviewClient
         webview.isHorizontalScrollBarEnabled = false
@@ -194,13 +193,9 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             if (newProgress == 100) {
-                if (binding.progressBar != null) {
-                    binding.progressBar.setVisibility(View.GONE)
-                }
+                binding.progressBar.setVisibility(View.GONE)
             } else {
-                if (binding.progressBar != null) {
-                    binding.progressBar.setVisibility(View.VISIBLE)
-                }
+                binding.progressBar.setVisibility(View.VISIBLE)
             }
         }
 
@@ -220,7 +215,7 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
      */
     private fun showSelectDialog() {
         if (mSelectPhotoDialog == null) {
-            mSelectPhotoDialog = SelectDialog(this.requireActivity(), View.OnClickListener { view ->
+            mSelectPhotoDialog = SelectDialog(this.requireActivity()) { view ->
                 when (view.id) {
                     R.id.tv_camera -> startCamera()
                     R.id.tv_photo -> startAlbum()
@@ -230,7 +225,7 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
                         mFilePathCallback = null
                     }
                 }
-            })
+            }
         }
         mSelectPhotoDialog?.show()
     }
@@ -252,15 +247,13 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
 
     override fun onDestroy() {
-        if (webview != null) {
-            webview.stopLoading()
-            webview.onPause()
-            webview.settings.javaScriptEnabled = false
-            webview.clearHistory()
-            webview.clearView()
-            webview.removeAllViews()
-            webview.destroy()
-        }
+        webview.stopLoading()
+        webview.onPause()
+        webview.settings.javaScriptEnabled = false
+        webview.clearHistory()
+        webview.clearView()
+        webview.removeAllViews()
+        webview.destroy()
         super.onDestroy()
     }
 
@@ -268,8 +261,8 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
         val location: Location? = getLastKnownLocation()
         if (location != null) {
             val locationStr = """
-            纬度：${location.getLatitude().toString()}
-            经度：${location.getLongitude()}
+            纬度：${location.latitude.toString()}
+            经度：${location.longitude}
             """.trimIndent()
             /*runOnUiThread {
                 val method = "javascript:gpsResult('$locationStr')"

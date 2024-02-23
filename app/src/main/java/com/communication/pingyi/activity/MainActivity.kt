@@ -6,16 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.ImageView
-import androidx.annotation.MainThread
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BACK
-import com.communication.lib_core.tools.EVENTBUS_EVENT_BOTTOM
 import com.communication.lib_core.tools.EVENTBUS_LOGIN_FAIL
-import com.communication.lib_core.tools.EVENTBUS_LOGOUT_SUCCESS
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
 import com.communication.lib_core.tools.EVENTBUS_TOKEN_INVALID
 import com.communication.lib_core.tools.EVENTBUS_USER_INFO
@@ -95,22 +91,22 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        LiveEventBus.get(EVENTBUS_LOGIN_FAIL,Boolean::class.java).observe(this,{
+        LiveEventBus.get(EVENTBUS_LOGIN_FAIL,Boolean::class.java).observe(this) {
             MMKVTool.saveReconnect(true)
-        })
+        }
 
 
-        LiveEventBus.get(EVENTBUS_USER_INFO,PersonInfoBean::class.java).observe(this,{
+        LiveEventBus.get(EVENTBUS_USER_INFO,PersonInfoBean::class.java).observe(this) {
 
             it?.imToken?.let { it1 -> connectIM(it1) }
             getMessage()
 //            connectIM("EZwwh9PYPQZpQnuF2rVycVuWn8ZzuNtuEfJoG4gGsUA=@yx9p.cn.rongnav.com;yx9p.cn.rongcfg.com")
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_TOKEN_INVALID,
             String::class.java
-        ).observe(this,{
+        ).observe(this){
 
                     mBaseModel == null
 
@@ -139,7 +135,7 @@ class MainActivity : BaseActivity() {
                         mLoginViewModel.createOrGetAuthorization(mLoginInfo)
                     }
 
-        })
+        }
 
     }
 //    private val reciver: PushReceiver = PushReceiver()
@@ -163,7 +159,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun connectIM(token : String){
+    private fun connectIM(token : String){
         val timeLimit : Int = 1000
         RongIM.connect(token, timeLimit, object : RongIMClient.ConnectCallback(){
             override fun onSuccess(t: String?) {
@@ -179,7 +175,7 @@ class MainActivity : BaseActivity() {
 
             override fun onDatabaseOpened(code: RongIMClient.DatabaseOpenStatus?) {
 
-                if (RongIMClient.DatabaseOpenStatus.DATABASE_OPEN_SUCCESS.equals(code)){
+                if (RongIMClient.DatabaseOpenStatus.DATABASE_OPEN_SUCCESS == code){
 
                 }else{
                     pyToast("数据库打开失败")

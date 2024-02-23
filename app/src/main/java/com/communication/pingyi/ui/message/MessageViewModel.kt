@@ -2,16 +2,13 @@ package com.communication.pingyi.ui.message
 
 import androidx.lifecycle.MutableLiveData
 import com.communication.lib_core.tools.EVENTBUS_ALARM_BADGE
-import com.communication.lib_core.tools.EVENTBUS_CHECK_UPDATE_VERSION_BUTTON
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BADGE
 import com.communication.lib_core.tools.EVENTBUS_UNREAD_MESSAGE
 import com.communication.lib_http.base.NetResult
 import com.communication.lib_http.httpdata.message.AlarmRequestBean
 import com.communication.lib_http.httpdata.message.AlarmTodoBean
 import com.communication.lib_http.httpdata.message.EventTodoBean
-import com.communication.lib_http.httpdata.message.MessageBean
 import com.communication.pingyi.base.BaseViewModel
-import com.communication.pingyi.ext.pyToast
 import com.jeremyliao.liveeventbus.LiveEventBus
 
 /**
@@ -45,7 +42,7 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
                 }
 
             }else if (result is NetResult.Error){
-                result.exception?.let {
+                result.exception.let {
                     if(!it.msg.contains("解析错误")) {
                         messageError.postValue(it.msg)
                     }
@@ -78,7 +75,7 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
                 }
 
             }else if (result is NetResult.Error){
-                result.exception?.let {
+                result.exception.let {
                     if(!it.msg.contains("解析错误")) {
                         messageError.postValue(it.msg)
                     }
@@ -111,7 +108,7 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
                 }
 
             }else if (result is NetResult.Error){
-                result.exception?.let {
+                result.exception.let {
                     messageError.postValue(it.msg)
                 }
             }
@@ -132,7 +129,7 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
                 }
 
             }else if (result is NetResult.Error){
-                result.exception?.let {
+                result.exception.let {
                     messageError.postValue(it.msg)
                 }
             }

@@ -1,5 +1,6 @@
 package com.communication.pingyi.ui.message.alarm
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.communication.lib_core.SpacesItemDecoration
@@ -13,7 +14,6 @@ import com.communication.pingyi.databinding.FragmentAlarmBinding
 import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.ui.message.HomeMessageFragment
 import com.communication.pingyi.ui.message.MessageViewModel
-import com.google.android.material.tabs.TabLayout
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
@@ -24,14 +24,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
     OnLoadMoreListener {
 
-    val mViewModel : MessageViewModel by viewModel<MessageViewModel>()
+    private val mViewModel : MessageViewModel by viewModel<MessageViewModel>()
 
     private val alarmAdapter = AlarmAdapter()
 
-    var alarmRequestBean : AlarmRequestBean? = null
+    private var alarmRequestBean : AlarmRequestBean? = null
 
 
-    val listFacilityCodeList: MutableList<String> = mutableListOf()
+    private val listFacilityCodeList: MutableList<String> = mutableListOf()
 
     private val parentFragment: HomeMessageFragment? by lazy {
         parentFragment as? HomeMessageFragment
@@ -43,18 +43,18 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        LiveEventBus.get(EVENTBUS_USER_INFO, PersonInfoBean::class.java).observe(this,{
+        LiveEventBus.get(EVENTBUS_USER_INFO, PersonInfoBean::class.java).observe(this) {
 
-            it.roles.mapTo(listFacilityCodeList){
+            it.roles.mapTo(listFacilityCodeList) {
                 it.remark
             }
-            alarmRequestBean = AlarmRequestBean(listFacilityCodeList,1,1000)
+            alarmRequestBean = AlarmRequestBean(listFacilityCodeList, 1, 1000)
 
-            if (alarmRequestBean != null) {
-                mViewModel.getAlarmList(alarmRequestBean!!)
-            }
+
+            mViewModel.getAlarmList(alarmRequestBean!!)
+
 //            connectIM("EZwwh9PYPQZpQnuF2rVycVuWn8ZzuNtuEfJoG4gGsUA=@yx9p.cn.rongnav.com;yx9p.cn.rongcfg.com")
-        })
+        }
 
 //        list.add("S0090HS0012700001")
 
@@ -92,6 +92,7 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun observeViewModels() {
 
         with(mViewModel){

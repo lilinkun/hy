@@ -1,5 +1,6 @@
 package com.communication.pingyi.ui.me.about
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -39,13 +40,14 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
         LiveEventBus.get(
             EVENTBUS_CHECK_UPDATE_VERSION_BUTTON,
             VersionModel::class.java
-        ).observe(this,{
-            updateVersion(it,true)
+        ).observe(this) {
+            updateVersion(it, true)
             versionModel = it
-        })
+        }
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initView() {
 
         binding.apply {

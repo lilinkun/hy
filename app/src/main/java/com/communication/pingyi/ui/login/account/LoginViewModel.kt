@@ -8,7 +8,6 @@ import com.communication.lib_http.base.MMKVTool
 import com.communication.lib_http.base.NetResult
 import com.communication.lib_http.httpdata.login.LoginInfo
 import com.communication.pingyi.base.BaseViewModel
-import com.communication.pingyi.ext.pyToast
 import com.jeremyliao.liveeventbus.LiveEventBus
 
 /**
@@ -28,14 +27,12 @@ class LoginViewModel(private val repository : LoginRepository) : BaseViewModel()
             if (result is NetResult.Success){
                 result.data?.let {
 
-                    if (it != null){
-                        MMKVTool.saveToken(it.access_token ?: "")
-                        MMKVTool.saveUsername(loginInfo.username)
-                        MMKVTool.savePassword(loginInfo.password)
-                        MMKVTool.saveBrand(loginInfo.brand)
-                        loginInfo.deviceId?.let { it1 -> MMKVTool.saveDeviceId(it1) }
-                        LiveEventBus.get(EVENTBUS_LOGIN_SUCCESS).post(true)
-                    }
+                    MMKVTool.saveToken(it.access_token ?: "")
+                    MMKVTool.saveUsername(loginInfo.username)
+                    MMKVTool.savePassword(loginInfo.password)
+                    MMKVTool.saveBrand(loginInfo.brand)
+                    loginInfo.deviceId?.let { it1 -> MMKVTool.saveDeviceId(it1) }
+                    LiveEventBus.get(EVENTBUS_LOGIN_SUCCESS).post(true)
 
                 }
             }else if (result is NetResult.Error){

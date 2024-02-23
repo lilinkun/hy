@@ -1,43 +1,25 @@
 package com.communication.pingyi.ui.message
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.communication.lib_core.PyAppDialog
 import com.communication.lib_core.checkDoubleClick
 import com.communication.lib_core.tools.EVENTBUS_ALARM_BADGE
-import com.communication.lib_core.tools.EVENTBUS_CHECK_UPDATE_VERSION_BUTTON
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BADGE
 import com.communication.lib_core.tools.EVENTBUS_LOGIN_SUCCESS
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
-import com.communication.lib_core.tools.EVENTBUS_UNREAD_MESSAGE
-import com.communication.lib_http.httpdata.message.AlarmTodoBean
 import com.communication.lib_http.httpdata.message.EventTodoBean
-import com.communication.lib_http.httpdata.version.VersionModel
 import com.communication.pingyi.R
 import com.communication.pingyi.adapter.MessageAdapter
 import com.communication.pingyi.adapter.MessagePagerAdapter
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentHomeMessageBinding
 import com.communication.pingyi.ext.pyToastShort
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import io.rong.imkit.RongIM
-import io.rong.imkit.userinfo.RongUserInfoManager
-import io.rong.imkit.userinfo.UserDataProvider
-import io.rong.imlib.RongIMClient
-import io.rong.imlib.model.Conversation
-import io.rong.imlib.model.UserInfo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

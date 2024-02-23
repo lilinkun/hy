@@ -25,10 +25,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class EventFragment : BaseFragment<FragmentMessageBinding>() , OnRefreshListener,
     OnLoadMoreListener {
 
-    val mViewModel : MessageViewModel by viewModel<MessageViewModel>()
+    private val mViewModel : MessageViewModel by viewModel<MessageViewModel>()
 
     private val messageAdapter = MessageAdapter()
-    private lateinit var userId : String;
+//    private lateinit var userId : String
 
 
     override fun getLayoutResId(): Int = R.layout.fragment_message
@@ -41,20 +41,20 @@ class EventFragment : BaseFragment<FragmentMessageBinding>() , OnRefreshListener
         LiveEventBus.get(
             EVENTBUS_MESSAGE_ITEM_CLICK,
             String::class.java
-        ).observe(this,{
+        ).observe(this){
             mViewModel.readOnlyMessage(it)
-        })
+        }
 
 
         LiveEventBus.get(
             EVENTBUS_LOGIN_SUCCESS,
             Boolean::class.java
-        ).observe(this,{
+        ).observe(this){
 
                 if(it) {
                     mViewModel.getMessageList()
                 }
-        })
+        }
 
     }
 

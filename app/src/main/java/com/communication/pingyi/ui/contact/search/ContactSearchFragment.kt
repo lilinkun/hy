@@ -39,18 +39,24 @@ class ContactSearchFragment : BaseFragment<FragmentSearchBinding>() {
         LiveEventBus.get(
             EVENTBUS_CONTACT_SEARCH_USER_CLICK,
             SearchUserBean::class.java
-        ).observe(this,{
+        ).observe(this) {
 
             val username = it.addressUser.userName
             val phone = it.addressUser.phoneNumber
             val dept = it.addressUser.dept.deptName
             val role = it.addressUser.postJob
 
-            val dir = ContactSearchFragmentDirections.actionContactSearchFragmentToContactDetailFragment(username,phone,role,dept)
+            val dir =
+                ContactSearchFragmentDirections.actionContactSearchFragmentToContactDetailFragment(
+                    username,
+                    phone,
+                    role,
+                    dept
+                )
             findNavController().navigate(dir)
 
 
-        })
+        }
 
 
     }

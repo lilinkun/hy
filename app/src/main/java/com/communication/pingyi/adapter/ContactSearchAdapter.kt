@@ -2,16 +2,12 @@ package com.communication.pingyi.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.adapters.ViewBindingAdapter.setClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.communication.lib_core.checkDoubleClick
 import com.communication.lib_core.tools.EVENTBUS_CONTACT_SEARCH_USER_CLICK
-import com.communication.lib_core.tools.EVENTBUS_CONTACT_USER_CLICK
-import com.communication.lib_http.httpdata.contact.ContactUserBean
 import com.communication.lib_http.httpdata.contact.SearchUserBean
-import com.communication.pingyi.databinding.ItemContactUserBinding
 import com.communication.pingyi.databinding.ItemSearchUserBinding
 import com.jeremyliao.liveeventbus.LiveEventBus
 

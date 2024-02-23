@@ -1,13 +1,11 @@
 package com.communication.pingyi.ui.message
 
 import com.communication.lib_http.api.MessageApi
-import com.communication.lib_http.base.BaseModel
 import com.communication.lib_http.base.BaseRepository
 import com.communication.lib_http.base.NetResult
 import com.communication.lib_http.httpdata.message.AlarmRequestBean
 import com.communication.lib_http.httpdata.message.AlarmTodoBean
 import com.communication.lib_http.httpdata.message.EventTodoBean
-import com.communication.lib_http.httpdata.message.MessageBean
 
 /**
  * Created by LG

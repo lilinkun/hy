@@ -50,18 +50,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         LiveEventBus.get(
             EVENTBUS_TOKEN_SUCCESS,
             Boolean::class.java
-        ).observe(this,{
+        ).observe(this){
             if (lifecycle.currentState == Lifecycle.State.RESUMED){
                 if (it){
                     mLoginViewModel.createOrGetAuthorization(mLoginInfo)
                 }
             }
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_LOGIN_SUCCESS,
             Boolean::class.java
-        ).observe(this,{
+        ).observe(this){
 
             if (lifecycle.currentState == Lifecycle.State.RESUMED) {
                 if(it) {
@@ -69,7 +69,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 }
             }
         }
-        )
 
     }
 

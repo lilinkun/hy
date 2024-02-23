@@ -1,5 +1,6 @@
 package com.communication.pingyi.ui.contact.contact
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -41,22 +42,25 @@ class ContactFragment : BaseFragment<FragmentContactsBinding>(), OnRefreshListen
         LiveEventBus.get(
             EVENTBUS_CONTACT_CLICK,
             ContactItem::class.java
-        ).observe(this,{
+        ).observe(this) {
             if (isActive()) {
-                val dir = MainFragmentDirections.actionMainFragmentToOrgListFragment(it.id.toString(),it.label)
+                val dir = MainFragmentDirections.actionMainFragmentToOrgListFragment(
+                    it.id.toString(),
+                    it.label
+                )
                 findNavController().navigate(dir)
             }
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_LOGIN_SUCCESS,
             Boolean::class.java
-        ).observe(this,{
+        ).observe(this) {
 
-            if(it) {
+            if (it) {
                 mViewModel.getContactList()
             }
-        })
+        }
 
     }
 
@@ -82,6 +86,7 @@ class ContactFragment : BaseFragment<FragmentContactsBinding>(), OnRefreshListen
         binding.refreshLayout.setOnRefreshListener(this)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun observeViewModels() {
         with(mViewModel){
             org_list.observe(viewLifecycleOwner){

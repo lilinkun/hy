@@ -3,12 +3,10 @@ package com.communication.pingyi.ui.login.welcome
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import com.communication.lib_http.base.MMKVTool
 import com.communication.pingyi.R
-import com.communication.pingyi.base.AppContext.getAssets
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentWelcomeBinding
 

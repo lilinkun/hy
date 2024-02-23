@@ -3,7 +3,6 @@ package com.communication.pingyi.ui.me.changepwd
 import android.content.Intent
 import android.os.Bundle
 import android.util.Base64
-import androidx.core.text.isDigitsOnly
 import androidx.navigation.fragment.findNavController
 import com.communication.lib_core.checkDoubleClick
 import com.communication.lib_core.tools.EVENTBUS_CHANGE_PASSWORD_SUCCESS
@@ -18,7 +17,6 @@ import com.communication.pingyi.databinding.FragmentChangepwdBinding
 import com.communication.pingyi.tools.RSAUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.regex.Pattern
 
 /**
  * Created by LG
@@ -37,11 +35,11 @@ class ChangePwdFragment : BaseFragment<FragmentChangepwdBinding>(){
         LiveEventBus.get(
             EVENTBUS_CHANGE_PASSWORD_SUCCESS,
             Boolean::class.java
-        ).observe(this,{
-            if (checkDoubleClick()){
+        ).observe(this) {
+            if (checkDoubleClick()) {
                 logoutConfirm()
             }
-        })
+        }
 
 
     }
@@ -91,11 +89,11 @@ class ChangePwdFragment : BaseFragment<FragmentChangepwdBinding>(){
                 }
 
                 val newPwd = Base64.encodeToString(
-                    RSAUtils.encryptByPublicKey(hyPsdNew.getText().toString(), PUBLICKEY),
+                    RSAUtils.encryptByPublicKey(hyPsdNew.getText(), PUBLICKEY),
                     Base64.NO_WRAP
                 )
                 val oldPwd = Base64.encodeToString(
-                    RSAUtils.encryptByPublicKey(hyPsdOld.getText().toString(), PUBLICKEY),
+                    RSAUtils.encryptByPublicKey(hyPsdOld.getText(), PUBLICKEY),
                     Base64.NO_WRAP
                 )
 

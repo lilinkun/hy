@@ -126,7 +126,7 @@ class WebviewActivity : BaseActivity() {
      * 压缩图片
      */
     private fun compressPicture(path: String) {
-        this?.let {
+        this.let {
             PhotoUtils.compressPicture(it, path, object : PhotoUtils.OnPictureCompressListener() {
                 override fun onSuccess(file: File) {
                     mFilePathCallback?.onReceiveValue(arrayOf(Uri.fromFile(file)))
@@ -161,13 +161,9 @@ class WebviewActivity : BaseActivity() {
 
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             if (newProgress == 100) {
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE)
-                }
+                progressBar.setVisibility(View.GONE)
             } else {
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.VISIBLE)
-                }
+                progressBar.setVisibility(View.VISIBLE)
             }
         }
 
@@ -188,7 +184,7 @@ class WebviewActivity : BaseActivity() {
      */
     private fun showSelectDialog() {
         if (mSelectPhotoDialog == null) {
-            mSelectPhotoDialog = SelectDialog(this, View.OnClickListener { view ->
+            mSelectPhotoDialog = SelectDialog(this) { view ->
                 when (view.id) {
                     R.id.tv_camera -> startCamera()
                     R.id.tv_photo -> startAlbum()
@@ -198,7 +194,7 @@ class WebviewActivity : BaseActivity() {
                         mFilePathCallback = null
                     }
                 }
-            })
+            }
         }
         mSelectPhotoDialog?.show()
     }
@@ -220,24 +216,22 @@ class WebviewActivity : BaseActivity() {
 
 
     override fun onDestroy() {
-        if (webView != null) {
-            webView.stopLoading()
-            webView.onPause()
-            webView.settings.javaScriptEnabled = false
-            webView.clearHistory()
-            webView.clearView()
-            webView.removeAllViews()
-            webView.destroy()
-            val file = CacheManager.getCacheFileBaseDir()
-            if (file != null && file.exists() && file.isDirectory) {
-                for (item in file.listFiles()) {
-                    item.delete()
-                }
-                file.delete()
+        webView.stopLoading()
+        webView.onPause()
+        webView.settings.javaScriptEnabled = false
+        webView.clearHistory()
+        webView.clearView()
+        webView.removeAllViews()
+        webView.destroy()
+        val file = CacheManager.getCacheFileBaseDir()
+        if (file != null && file.exists() && file.isDirectory) {
+            for (item in file.listFiles()) {
+                item.delete()
             }
-            deleteDatabase("webview.db")
-            deleteDatabase("webviewCache.db")
+            file.delete()
         }
+        deleteDatabase("webview.db")
+        deleteDatabase("webviewCache.db")
         super.onDestroy()
     }
 
@@ -245,8 +239,8 @@ class WebviewActivity : BaseActivity() {
         val location: Location? = getLastKnownLocation()
         if (location != null) {
             val locationStr = """
-            纬度：${location.getLatitude().toString()}
-            经度：${location.getLongitude()}
+            纬度：${location.latitude.toString()}
+            经度：${location.longitude}
             """.trimIndent()
             /*runOnUiThread {
                 val method = "javascript:gpsResult('$locationStr')"
