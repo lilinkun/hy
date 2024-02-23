@@ -18,6 +18,7 @@ import com.communication.pingyi.activity.LoginActivity
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentMeBinding
 import com.communication.pingyi.ui.main.MainFragmentDirections
+import com.google.gson.Gson
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
@@ -106,7 +107,8 @@ class MeFragment : BaseFragment<FragmentMeBinding>(), OnRefreshListener {
             rlUserinfo.setOnClickListener {
                 if (checkDoubleClick()){
                     personalInfo?.let {
-                        val personStr = Utils.serializeToString(it)
+//                        val personStr = Utils.serializeToString(it)
+                        val personStr = Gson().toJson(it)
                         val dir = MainFragmentDirections.actionMainFragmentToPersonInfoFragment(personStr)
                         findNavController().navigate(dir)
                     }

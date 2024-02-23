@@ -20,7 +20,6 @@ data class AlarmTodoBean(
     val reportedTime: String,
     val serviceAlarmFileList: List<ServiceAlarmFile>,
     val transportMedium: Any,
-
     val alarmStatusName: String,
     val alarmTypeName: String,
     val functionAreaTypeName: String,

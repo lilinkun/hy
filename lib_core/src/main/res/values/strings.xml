@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">衡永数字高速度</string>
+    <string name="app_name">衡永数字高速</string>
 
     <string name="login">登录</string>
     <string name="login_account_hint">请输入手机号</string>
@@ -60,7 +60,9 @@
     <string name="username_tip">用户名: </string>
 
     <!--关于我们-->
-    <string name="about_inspect_version">检查新版本</string>
+    <string name="about_inspect_version">检查更新</string>
+    <string name="customer_service_tel">客服电话</string>
+    <string name="tel_number">0734-6372678</string>
     <string name="about_copyright">Copyright © 2022-2032 湖南交通科学研究院有限公司</string>
     <string name="update_version_title">发现新版本</string>
     <string name="update_version_cancel">下次再说</string>
@@ -71,6 +73,8 @@
     <string name="update_version_apk_size">安装包大小：%s\n</string>
     <string name="update_version_content">更新内容：\n%s</string>
     <string name="update_version_latest">已经是最新版本</string>"
+    <string name="function_introduction">功能介绍</string>
+    <string name="introduction_tip">\t\t\t\t智慧衡永综合运营管理平台的建设，旨在改变传统以多系统分散建设、独立运行为主的建设模式，面向高速公路运营管理业务建设一个统一的、一体化运营管理平台，通过成熟的信息化项目管理模式，提供“持续的、稳定的、先进的、实用的”应用软件平台来提升高速公路运营公司业务管理能力，实现精细化运营管理，并逐步形成具有运营公司特色的信息化管理体系。智慧衡永综合运营管理平台通过接口将不同业务子系统进行数据打通与业务联通，通过统一的平台，使各个原本独立的子系统，可以在统一的总平台上互相对话，做到充分数据共享，实现业务联通与管理闭环。\n\t\t\t\t智慧衡永综合运营管理平台主平台面向监控中心，支持事件监测与处置、视频监控等业务内容，满足日常调度和应急指挥的需求。</string>
 
     <!--修改密码-->
     <string name="psd_old">原密码</string>

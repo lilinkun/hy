@@ -3,6 +3,7 @@ package com.communication.pingyi.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.core.view.forEachIndexed
@@ -10,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.communication.lib_core.PyMessageRed
 import com.communication.lib_core.tools.EVENTBUS_APP_CLICK
+import com.communication.lib_core.tools.EVENTBUS_EVENT_BOTTOM
+import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_core.tools.EVENTBUS_UNREAD_MESSAGE
 import com.communication.lib_http.api.WEB_MESSAGE
@@ -20,6 +23,7 @@ import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
 
 /**
@@ -30,6 +34,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     lateinit var viewPager : ViewPager2
+    lateinit var bottomNavBar : BottomNavigationView
 
     override fun getLayoutResId(): Int = R.layout.fragment_main
 
@@ -63,6 +68,19 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
 
 
+
+        LiveEventBus.get(
+            EVENTBUS_EVENT_BOTTOM,
+            Boolean::class.java
+        ).observe(this,{
+            if (it){
+                bottomNavBar.visibility = View.VISIBLE
+            }else{
+                bottomNavBar.visibility = View.GONE
+            }
+        })
+
+
     }
 
     override fun onStart() {
@@ -78,11 +96,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun initView() {
         viewPager = binding.viewPager
-        val bottomNavBar = binding.bottomNavBar
+        bottomNavBar = binding.bottomNavBar
         viewPager.adapter = MainPagerAdapter(this)
         viewPager.currentItem = 0
         viewPager.offscreenPageLimit = 4
         viewPager.isUserInputEnabled = false//禁止滑动
+        bottomNavBar.visibility = View.GONE
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
@@ -159,5 +178,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         /*val dir = MainFragmentDirections.actionMainFragmentToWebViewFragment(url = url)
         findNavController().navigate(dir)*/
     }
+
 
 }

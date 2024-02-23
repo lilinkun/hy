@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.communication.lib_core.tools.EVENTBUS_ALARM_BADGE
 import com.communication.lib_core.tools.EVENTBUS_CHECK_UPDATE_VERSION_BUTTON
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BADGE
+import com.communication.lib_core.tools.EVENTBUS_UNREAD_MESSAGE
 import com.communication.lib_http.base.NetResult
 import com.communication.lib_http.httpdata.message.AlarmRequestBean
 import com.communication.lib_http.httpdata.message.AlarmTodoBean
@@ -24,7 +25,6 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
     val alarmList = MutableLiveData<MutableList<AlarmTodoBean>>()
     val messageError = MutableLiveData<String>()
 
-
     //获取待办事件列表
     fun getMessageList(){
         launch {
@@ -37,7 +37,11 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
 
                     messageList.postValue(result.data)
 
-                    LiveEventBus.get(EVENTBUS_EVENT_BADGE).post(it?.size)
+
+
+
+                    LiveEventBus.get(EVENTBUS_EVENT_BADGE).post(it.count{ it.eventStatus == "untreated" })
+
                 }
 
             }else if (result is NetResult.Error){
@@ -69,7 +73,8 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
 
                     alarmList.postValue(it)
 
-                    LiveEventBus.get(EVENTBUS_ALARM_BADGE).post(it?.size)
+                    LiveEventBus.get(EVENTBUS_ALARM_BADGE).post(it.count{ it.alarmStatus == "untreated" })
+
                 }
 
             }else if (result is NetResult.Error){
@@ -86,6 +91,12 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
         }
 
 
+    }
+
+    fun unreadCount(eventCount : Int,alarmCount : Int,msgCount : Int){
+        if (eventCount != -1 && alarmCount != -1 && msgCount != -1) {
+            LiveEventBus.get(EVENTBUS_UNREAD_MESSAGE).post(eventCount+alarmCount+msgCount)
+        }
     }
 
     fun readOnlyMessage(id : String){

@@ -21,22 +21,18 @@ class PersonInfoFragment : BaseFragment<FragmentInfoBinding>() {
 
     override fun getLayoutResId(): Int = R.layout.fragment_info
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun initView() {
 
         val person = args.personal
-        val personInfoBean: PersonInfoBean = Utils.deserializeFromString(person) as PersonInfoBean
+        val personInfoBean: PersonInfoBean = Gson().fromJson(person,PersonInfoBean::class.java)
 
         binding.let {
 
-            it.info = personInfoBean
+            it.infoName.setContent(personInfoBean.userName)
+
+            it.infoUserName.setContent(personInfoBean.nickName)
 
         }
-
-    }
-
-    override fun initView() {
-
 
     }
 

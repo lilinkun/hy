@@ -35,5 +35,5 @@ interface MessageApi {
 
 
     @GET("$SERVER_BASE_URL/serviceArea/appServiceAlarm/getAppServiceAlarmInfoList")
-    suspend fun getAlarmList(@Query("facilityCodeList")facilityCodeList : String,@Query("pageNum") pageNum : Int,@Query("pageSize") pageSize : Int ) : BaseModelList<MutableList<AlarmTodoBean>>
+    suspend fun getAlarmList(@Query("facilityCodeList")facilityCodeList : List<String>,@Query("pageNum") pageNum : Int,@Query("pageSize") pageSize : Int ) : BaseModelList<MutableList<AlarmTodoBean>>
 }

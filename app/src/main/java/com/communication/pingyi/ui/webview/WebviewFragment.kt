@@ -4,27 +4,36 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.communication.lib_core.PyAppDialog
 import com.communication.lib_core.SelectDialog
+import com.communication.lib_core.tools.EVENTBUS_EVENT_BACK
+import com.communication.lib_core.tools.EVENTBUS_EVENT_BOTTOM
 import com.communication.lib_core.tools.GPSUtils
 import com.communication.pingyi.R
 import com.communication.pingyi.base.AppContext.getSystemService
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentWebviewBinding
+import com.communication.pingyi.ext.pyToast
 import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.tools.AndroidJavascriptInterface
 import com.communication.pingyi.tools.PhotoUtils
+import com.jeremyliao.liveeventbus.LiveEventBus
 import java.io.File
 
 
@@ -38,13 +47,28 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
     private var mSelectPhotoDialog: SelectDialog? = null
     private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
 
+    lateinit var webview : WebView
+
+    private val homeUrl = "http://10.168.200.2:9883/#/"
+    private val homeUrl1 = "http://10.168.200.2:9883/#/index"
+
     private val args: WebviewFragmentArgs by navArgs()
 
     override fun getLayoutResId(): Int = R.layout.fragment_webview
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        LiveEventBus.get(EVENTBUS_EVENT_BACK,Boolean::class.java).observe(this,{
+            if(it){
+                if (webview.canGoBack()){
+                    webview.goBack();
+                }
+            }
+        })
+    }
+
     override fun initView() {
 //        val url = "http://www.baidu.com"
-        var url = "http://10.168.200.2:9883/#/"
 
 //        if (args.url.isNullOrEmpty()) {
 //            url = "http://10.168.200.2:9883/#/"
@@ -56,24 +80,6 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
         initWebView()
 
-
-        binding.webView.apply {
-            /*settings.defaultTextEncodingName = "utf-8"
-            settings.allowFileAccess = true
-            settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NARROW_COLUMNS;
-            settings.supportZoom()
-            settings.builtInZoomControls = true
-            settings.displayZoomControls = false
-            settings.useWideViewPort = true
-            settings.supportMultipleWindows()
-            settings.setAppCacheEnabled(true)
-            settings.domStorageEnabled = true
-            settings.javaScriptEnabled = true
-            settings.setGeolocationEnabled(true)
-            settings.setAppCachePath(context.cacheDir.absolutePath)*/
-
-            loadUrl(url)
-        }
 
         if (!GPSUtils.isOPen(requireContext())) {
             showGPSDialog()
@@ -138,21 +144,50 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(){
-        val settings = binding.webView.settings
+        webview = binding.webView
+
+        val settings = webview.settings
         settings.javaScriptEnabled = true
         settings.javaScriptCanOpenWindowsAutomatically = true
         //自适应屏幕
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
-        settings.loadWithOverviewMode = true
-        settings.domStorageEnabled = true
-        settings.databaseEnabled = true
-        settings.setSupportZoom(false)
-        binding.webView.addJavascriptInterface(AndroidJavascriptInterface(requireActivity().applicationContext), "Android")
-        binding.webView.isHorizontalScrollBarEnabled = false
-        binding.webView.isVerticalScrollBarEnabled = false
-        binding.webView.webChromeClient = webViewChromeClient
+//        settings.loadWithOverviewMode = true
+//        settings.domStorageEnabled = true
+//        settings.databaseEnabled = true
+//        settings.setSupportZoom(false)
+        webview.addJavascriptInterface(AndroidJavascriptInterface(requireActivity().applicationContext), "Android")
+        webview.webViewClient = webviewClient
+        webview.isHorizontalScrollBarEnabled = false
+        webview.isVerticalScrollBarEnabled = false
+        webview.webChromeClient = webViewChromeClient
+
+        webview.loadUrl(homeUrl)
+    }
+
+    private val webviewClient = object : WebViewClient(){
+
+        override fun onReceivedError(
+            view: WebView?,
+            request: WebResourceRequest?,
+            error: WebResourceError?
+        ) {
+            super.onReceivedError(view, request, error)
+        }
+
+        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+            super.onPageStarted(view, url, favicon)
+        }
+
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+                if (url == homeUrl || url == homeUrl1){
+                    LiveEventBus.get(EVENTBUS_EVENT_BOTTOM).post(true)
+                }else {
+                    LiveEventBus.get(EVENTBUS_EVENT_BOTTOM).post(false)
+                }
+        }
+
     }
 
     private val webViewChromeClient = object : WebChromeClient() {
@@ -217,14 +252,14 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
 
     override fun onDestroy() {
-        if (binding.webView != null) {
-            binding.webView.stopLoading()
-            binding.webView.onPause()
-            binding.webView.settings.javaScriptEnabled = false
-            binding.webView.clearHistory()
-            binding.webView.clearView()
-            binding.webView.removeAllViews()
-            binding.webView.destroy()
+        if (webview != null) {
+            webview.stopLoading()
+            webview.onPause()
+            webview.settings.javaScriptEnabled = false
+            webview.clearHistory()
+            webview.clearView()
+            webview.removeAllViews()
+            webview.destroy()
         }
         super.onDestroy()
     }

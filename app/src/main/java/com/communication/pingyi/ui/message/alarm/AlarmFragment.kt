@@ -3,6 +3,8 @@ package com.communication.pingyi.ui.message.alarm
 import android.os.Bundle
 import android.view.View
 import com.communication.lib_core.SpacesItemDecoration
+import com.communication.lib_core.tools.EVENTBUS_USER_INFO
+import com.communication.lib_http.httpdata.me.PersonInfoBean
 import com.communication.lib_http.httpdata.message.AlarmRequestBean
 import com.communication.pingyi.R
 import com.communication.pingyi.adapter.AlarmAdapter
@@ -12,6 +14,7 @@ import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.ui.message.HomeMessageFragment
 import com.communication.pingyi.ui.message.MessageViewModel
 import com.google.android.material.tabs.TabLayout
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
@@ -28,7 +31,7 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
     var alarmRequestBean : AlarmRequestBean? = null
 
 
-    val list: MutableList<String> = mutableListOf()
+    val listFacilityCodeList: MutableList<String> = mutableListOf()
 
     private val parentFragment: HomeMessageFragment? by lazy {
         parentFragment as? HomeMessageFragment
@@ -40,7 +43,20 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        list.add("S0090HS0012700001")
+        LiveEventBus.get(EVENTBUS_USER_INFO, PersonInfoBean::class.java).observe(this,{
+
+            it.roles.mapTo(listFacilityCodeList){
+                it.remark
+            }
+            alarmRequestBean = AlarmRequestBean(listFacilityCodeList,1,1000)
+
+            if (alarmRequestBean != null) {
+                mViewModel.getAlarmList(alarmRequestBean!!)
+            }
+//            connectIM("EZwwh9PYPQZpQnuF2rVycVuWn8ZzuNtuEfJoG4gGsUA=@yx9p.cn.rongnav.com;yx9p.cn.rongcfg.com")
+        })
+
+//        list.add("S0090HS0012700001")
 
 //        AlarmRequestBean alarmRequestBean = new AlarmRequestBean();
 
@@ -53,11 +69,6 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
             badge.isVisible = true
             badge.number = 2
         }*/
-        alarmRequestBean = AlarmRequestBean("S0090HS0012700001",1,200)
-
-        if (alarmRequestBean != null) {
-            mViewModel.getAlarmList(alarmRequestBean!!)
-        }
     }
 
     override fun initView() {

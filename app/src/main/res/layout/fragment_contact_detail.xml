@@ -163,41 +163,54 @@
              android:layout_height="wrap_content"
              android:orientation="horizontal"
              app:layout_constraintTop_toBottomOf="@+id/include_info"
-             android:layout_marginTop="@dimen/dp20"
+             android:layout_marginTop="@dimen/dp100"
              android:paddingTop="@dimen/dp5"
              >
 
 
-             <com.communication.lib_core.TextViewYH
-                 android:id="@+id/tv_contact_phone"
+             <ImageView
+                 android:id="@+id/iv_contact_message"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
-                 app:drawableTopCompat="@drawable/ic_contact_phone"
-                 android:text="@string/contact_phone"
+                 android:src="@drawable/ic_contact_message"
+                 android:gravity="center"
+                 />
+
+             <ImageView
+                 android:id="@+id/iv_contact_voice"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:src="@drawable/ic_contact_voice"
+                 android:gravity="center"
+                 />
+
+             <ImageView
+                 android:id="@+id/iv_contact_video"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:src="@drawable/ic_contact_video"
+                 android:gravity="center"
+                 />
+
+             <ImageView
+                 android:id="@+id/iv_contact_phone"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:src="@drawable/ic_contact_tel"
                  android:drawablePadding="@dimen/dp10"
                  android:gravity="center"
                  />
 
-             <com.communication.lib_core.TextViewYH
-                 android:id="@+id/tv_contact_message"
+             <ImageView
+                 android:id="@+id/iv_send_sms"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
-                 app:drawableTopCompat="@drawable/ic_contact_message"
-                 android:text="@string/contact_message"
-                 android:drawablePadding="@dimen/dp10"
-                 android:gravity="center"
-                 />
-
-             <com.communication.lib_core.TextViewYH
-                 android:id="@+id/tv_send_message"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 app:drawableTopCompat="@drawable/ic_contact_copy"
-                 android:text="@string/send_message"
-                 android:drawablePadding="@dimen/dp10"
+                 android:src="@drawable/ic_contact_sms"
                  android:gravity="center"
                  />
 

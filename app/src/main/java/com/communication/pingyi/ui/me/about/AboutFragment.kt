@@ -12,6 +12,7 @@ import com.communication.pingyi.databinding.FragmentAboutBinding
 import com.communication.pingyi.ext.pyToast
 import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.tools.UpdateVersionTool
+import com.communication.pingyi.ui.main.MainFragmentDirections
 import com.communication.pingyi.ui.update_version.UpdateVersionViewModel
 import com.jeremyliao.liveeventbus.LiveEventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,7 +51,7 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
         binding.apply {
             tvAboutVersion.text = "Version " + context?.let { Utils.getVersionName(it) }
 
-            tvAboutTitle.setOnClickListener {
+            titleAbout.setBackOnClick {
 
                 findNavController().navigateUp()
 
@@ -63,6 +64,13 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
                     }else{
                         pyToast(resources.getString(R.string.update_version_latest))
                     }
+                }
+            }
+
+            tvIntroduction.setOnClickListener{
+                if (isActive()){
+                    val dir = AboutFragmentDirections.actionAboutFragmentToIntroductionFragment()
+                    findNavController().navigate(dir)
                 }
             }
 

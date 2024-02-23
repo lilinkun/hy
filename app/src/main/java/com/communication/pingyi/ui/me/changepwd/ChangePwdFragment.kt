@@ -51,11 +51,12 @@ class ChangePwdFragment : BaseFragment<FragmentChangepwdBinding>(){
         binding.apply {
 
 
-            title.setIconOnClick{
+            title.setBackOnClick{
                 if (checkDoubleClick()){
                     findNavController().navigateUp()
                 }
             }
+
 
             title.setBtnRightOnClick{
                 if (checkDoubleClick()){

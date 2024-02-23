@@ -3,11 +3,20 @@ package com.communication.pingyi.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.widget.ImageView
+import androidx.annotation.MainThread
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.communication.lib_core.tools.EVENTBUS_EVENT_BACK
+import com.communication.lib_core.tools.EVENTBUS_EVENT_BOTTOM
 import com.communication.lib_core.tools.EVENTBUS_LOGIN_FAIL
+import com.communication.lib_core.tools.EVENTBUS_LOGOUT_SUCCESS
+import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
 import com.communication.lib_core.tools.EVENTBUS_TOKEN_INVALID
 import com.communication.lib_core.tools.EVENTBUS_USER_INFO
 import com.communication.lib_core.tools.Utils
@@ -18,9 +27,9 @@ import com.communication.lib_http.httpdata.me.PersonInfoBean
 import com.communication.pingyi.R
 import com.communication.pingyi.base.BaseActivity
 import com.communication.pingyi.ext.pyToast
-import com.communication.pingyi.jpush.PushReceiver
 import com.communication.pingyi.tools.ActivityUtil
 import com.communication.pingyi.ui.login.account.LoginViewModel
+import com.communication.pingyi.ui.main.MainFragment
 import com.jeremyliao.liveeventbus.LiveEventBus
 import io.rong.imkit.GlideKitImageEngine
 import io.rong.imkit.RongIM
@@ -53,12 +62,7 @@ class MainActivity : BaseActivity() {
         RongIM.setConnectionStatusListener(connectionStatusListener)
 
         RongExtensionManager.getInstance().registerExtensionModule(SightExtensionModule())
-
 //        connectIM("z00eycorwV9pQnuF2rVycVuWn8ZzuNtuvrvfqh7f5j8=@yx9p.cn.rongnav.com;yx9p.cn.rongcfg.com")
-
-
-
-
 
         RongConfigCenter.featureConfig().kitImageEngine = object : GlideKitImageEngine() {
             override fun loadConversationListPortrait(
@@ -99,9 +103,9 @@ class MainActivity : BaseActivity() {
         LiveEventBus.get(EVENTBUS_USER_INFO,PersonInfoBean::class.java).observe(this,{
 
             it?.imToken?.let { it1 -> connectIM(it1) }
+            getMessage()
 //            connectIM("EZwwh9PYPQZpQnuF2rVycVuWn8ZzuNtuEfJoG4gGsUA=@yx9p.cn.rongnav.com;yx9p.cn.rongcfg.com")
         })
-
 
         LiveEventBus.get(
             EVENTBUS_TOKEN_INVALID,
@@ -141,6 +145,24 @@ class MainActivity : BaseActivity() {
 //    private val reciver: PushReceiver = PushReceiver()
 
 
+//    @MainThread
+    fun getMessage() {
+        Thread.sleep(2000)
+        RongIMClient.getInstance().getTotalUnreadCount(MyResultCallback())
+    }
+
+    class MyResultCallback() : RongIMClient.ResultCallback<Int>() {
+        override fun onSuccess(p0: Int?) {
+            Log.i("MyResultCallback", "$p0")
+
+            LiveEventBus.get(EVENTBUS_MESSAGE_BADGE).post(p0)
+
+        }
+        override fun onError(p0: RongIMClient.ErrorCode?) {
+            Log.i("MyResultCallback", p0.toString())
+        }
+    }
+
     fun connectIM(token : String){
         val timeLimit : Int = 1000
         RongIM.connect(token, timeLimit, object : RongIMClient.ConnectCallback(){
@@ -153,7 +175,6 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onError(e: RongIMClient.ConnectionErrorCode?) {
-                pyToast(e!!.name)
             }
 
             override fun onDatabaseOpened(code: RongIMClient.DatabaseOpenStatus?) {
@@ -174,5 +195,37 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
 //        unregisterReceiver(reciver)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+
+            // 获取FragmentManager
+
+            // 获取FragmentManager
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+            val navController = navHostFragment.childFragmentManager.primaryNavigationFragment
+
+            if (navController is MainFragment){
+
+                if (navController.viewPager.currentItem == 0){
+                    if(!navController.bottomNavBar.isShown){
+
+
+                        LiveEventBus.get(EVENTBUS_EVENT_BACK).post(true)
+
+                        return true
+                    }
+                }
+
+
+            }
+
+           return super.onKeyDown(keyCode, event)
+        }
+
+
+        return super.onKeyDown(keyCode, event)
     }
 }

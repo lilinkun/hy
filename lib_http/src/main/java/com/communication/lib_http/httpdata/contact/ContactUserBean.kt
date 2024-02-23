@@ -34,7 +34,9 @@ data class ContactUserBean(
     val updateBy: Any,
     val updateTime: Any,
     val userId: Int,
-    val userName: String
+    val userName: String,
+    val imToken : String,
+    val sysUserName : String
 )
 
 data class Dept(

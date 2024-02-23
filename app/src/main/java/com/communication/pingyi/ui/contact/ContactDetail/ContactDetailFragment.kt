@@ -15,6 +15,10 @@ import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentContactDetailBinding
 import com.communication.pingyi.ext.pyToast
 import com.google.gson.Gson
+import io.rong.callkit.RongCallKit
+import io.rong.imkit.utils.RouteUtils
+import io.rong.imlib.model.Conversation
+import io.rong.imlib.model.ConversationIdentifier
 
 class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
 
@@ -64,7 +68,7 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
             tvUsername.setText(username)
             tvPersonal.setText(username?.substring(1, username.length))
 
-            tvContactPhone.setOnClickListener {
+            ivContactPhone.setOnClickListener {
 
                 val intent = Intent()
                 intent.action  =  Intent.ACTION_DIAL
@@ -72,22 +76,47 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
                 startActivity(intent)
             }
 
-            tvContactMessage.setOnClickListener {
+            ivContactVoice.setOnClickListener {
+                if (!contactBean.sysUserName.isNullOrEmpty()) {
+                    RongCallKit.startSingleCall(
+                        activity,
+                        contactBean.sysUserName,
+                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_VIDEO
+                    );
+                }else{
+                    pyToast("此人无即时通讯功能")
+                }
+            }
+
+            ivContactVideo.setOnClickListener {
+                if (!contactBean.sysUserName.isNullOrEmpty()) {
+                    RongCallKit.startSingleCall(
+                        activity,
+                        contactBean.sysUserName,
+                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_AUDIO
+                    );
+                }else{
+                    pyToast("此人无即时通讯功能")
+                }
+            }
+
+
+            ivContactMessage.setOnClickListener {
+                if (!contactBean.sysUserName.isNullOrEmpty()) {
+                    val targetId = contactBean.sysUserName;
+                    val bundle = Bundle()
+                    val conversationIdentifier = ConversationIdentifier(Conversation.ConversationType.PRIVATE, targetId);
+                    RouteUtils.routeToConversationActivity(context, conversationIdentifier, false, bundle)
+                }else{
+                    pyToast("此人无即时通讯功能")
+                }
+            }
+
+            ivSendSms.setOnClickListener {
                 val intent = Intent()
                 intent.action = Intent.ACTION_SENDTO
                 intent.data = Uri.parse("smsto:$phone")
                 startActivity(intent)
-            }
-
-            tvSendMessage.setOnClickListener {
-//                val clipboard =
-//                activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager;
-//                val clipData = ClipData.newPlainText("Label",phone)
-//                clipboard.setPrimaryClip(clipData)
-//                pyToast("已复制邮箱地址到剪贴板")
-
-
-
             }
 
             icBack.setOnClickListener {

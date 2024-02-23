@@ -1,20 +1,12 @@
 package com.communication.pingyi.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.communication.lib_core.checkDoubleClick
-import com.communication.lib_core.tools.EVENTBUS_MESSAGE_ITEM_CLICK
-import com.communication.lib_http.httpdata.message.MessageBean
-import com.communication.pingyi.databinding.ItemMessageBinding
-import com.jeremyliao.liveeventbus.LiveEventBus
-import com.communication.lib_core.R
-import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_http.httpdata.message.EventTodoBean
+import com.communication.pingyi.databinding.ItemMessageBinding
 
 class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(MessageDiffCallback()) {
 

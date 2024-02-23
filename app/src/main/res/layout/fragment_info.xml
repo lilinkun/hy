@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp50"
             android:background="@color/white"
+            android:visibility="gone"
             android:paddingLeft="@dimen/dp15"
             android:paddingRight="@dimen/dp15">
 
@@ -89,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:py_right_icon_show="false"
-            app:py_text_view_right_content="asdasd"
             app:py_text_view_right_name="@string/me_info_name" />
 
         <com.communication.lib_core.PyDividerAll
@@ -141,7 +141,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:py_right_icon_show="false"
-            app:py_text_view_right_content="asdasd"
             app:py_text_view_right_name="@string/me_info_username" />
     </LinearLayout>
 

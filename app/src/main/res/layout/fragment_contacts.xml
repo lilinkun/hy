@@ -22,13 +22,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.communication.lib_core.PyMainTitle
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:py_title_main_name="@string/main_contacts"
-            app:py_title_main_text_size="24"
+        <com.communication.lib_core.PyTitle
+            android:id="@+id/pt_message_main"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:py_title_name="@string/main_contacts"
             />
-
 
 
         <com.communication.lib_core.TextViewYH
@@ -37,6 +39,7 @@
             android:layout_height="35dp"
             android:layout_marginStart="@dimen/dp16"
             android:layout_marginEnd="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp10"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/search"
             />
@@ -65,13 +68,12 @@
                 android:id="@+id/rv_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_circle"
                 android:layout_marginTop="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp80"
+                android:background="@drawable/shape_circle"
                 android:paddingStart="@dimen/dp20"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_contact"
-                />
-
+                tools:listitem="@layout/item_contact" />
 
 
         </LinearLayout>

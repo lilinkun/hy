@@ -187,6 +187,15 @@
         tools:layout="@layout/fragment_about"
         >
 
+        <action
+            android:id="@+id/action_aboutFragment_to_introductionFragment"
+            app:destination="@id/introductionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" >
+        </action>
+
     </fragment>
 
     <fragment
@@ -200,6 +209,15 @@
             android:name="url"
             app:argType="string"
             />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/introductionFragment"
+        android:name="com.communication.pingyi.ui.me.about.introduction.IntroductionFragment"
+        android:label="IntroductionFragment"
+        tools:layout="@layout/fragment_introduction"
+        >
 
     </fragment>
 
