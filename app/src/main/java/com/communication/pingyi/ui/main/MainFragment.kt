@@ -2,29 +2,43 @@ package com.communication.pingyi.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.core.view.forEachIndexed
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.communication.lib_core.PyMessageRed
+import com.communication.lib_core.tools.EVENTBUS_ALARM_CLICK
 import com.communication.lib_core.tools.EVENTBUS_APP_CLICK
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BOTTOM
+import com.communication.lib_core.tools.EVENTBUS_GROUP_CLICK
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_core.tools.EVENTBUS_UNREAD_MESSAGE
-import com.communication.lib_http.api.WEB_MESSAGE
+import com.communication.lib_http.api.WEB_ALARM
+import com.communication.lib_http.api.WEB_EVENT
 import com.communication.pingyi.R
 import com.communication.pingyi.activity.WebviewActivity
-import com.communication.pingyi.adapter.*
+import com.communication.pingyi.adapter.ITEM_CONTACTS
+import com.communication.pingyi.adapter.ITEM_HOME
+import com.communication.pingyi.adapter.ITEM_ME
+import com.communication.pingyi.adapter.ITEM_MESSAGE
+import com.communication.pingyi.adapter.MainPagerAdapter
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentMainBinding
+import com.communication.pingyi.ext.pyToast
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
+import io.rong.imkit.manager.UnReadMessageManager
+import io.rong.imkit.userinfo.RongUserInfoManager
+import io.rong.imkit.userinfo.model.GroupUserInfo
+import io.rong.imkit.utils.RouteUtils
+import io.rong.imlib.model.Conversation
+import io.rong.imlib.model.ConversationIdentifier
+import io.rong.imlib.model.Group
+import io.rong.imlib.model.UserInfo
 
 /**
  * Created by LG
@@ -55,7 +69,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             String::class.java
         ).observe(this,{ key->
             key?.let {
-                goToWebActivity(WEB_MESSAGE+it + "&flag=false")
+                goToWebActivity(WEB_EVENT+it + "&flag=false")
+            }
+        })
+        LiveEventBus.get(
+            EVENTBUS_ALARM_CLICK,
+            Int::class.java
+        ).observe(this,{ key->
+            key?.let {
+                goToWebActivity(WEB_ALARM+it)
             }
         })
 
@@ -66,7 +88,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             initMessage(it)
         })
 
+        LiveEventBus.get(
+            EVENTBUS_GROUP_CLICK,
+            String::class.java
+        ).observe(this,{
 
+            val targetId = it
+            val bundle = Bundle()
+            val conversationIdentifier = ConversationIdentifier(Conversation.ConversationType.GROUP, targetId);
+            RouteUtils.routeToConversationActivity(context, conversationIdentifier, false, bundle)
+        })
 
 
         LiveEventBus.get(
@@ -79,7 +110,35 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 bottomNavBar.visibility = View.GONE
             }
         })
+        val conversationType: Conversation.ConversationType = Conversation.ConversationType.PRIVATE
+        val groupConversationType: Conversation.ConversationType = Conversation.ConversationType.GROUP
 
+        var conversationTypes : MutableList<Conversation.ConversationType> = ArrayList()
+
+        conversationTypes.add(conversationType)
+        conversationTypes.add(groupConversationType)
+
+        UnReadMessageManager.getInstance().addObserver(conversationTypes.toTypedArray(),object : UnReadMessageManager.IUnReadMessageObserver{
+            override fun onCountChanged(count: Int) {
+
+                LiveEventBus.get(EVENTBUS_MESSAGE_BADGE).post(count)
+            }
+
+        })
+
+
+        RongUserInfoManager.getInstance().addUserDataObserver(object :RongUserInfoManager.UserDataObserver{
+            override fun onUserUpdate(info: UserInfo?) {
+
+            }
+
+            override fun onGroupUpdate(group: Group?) {
+            }
+
+            override fun onGroupUserInfoUpdate(groupUserInfo: GroupUserInfo?) {
+            }
+
+        })
 
     }
 

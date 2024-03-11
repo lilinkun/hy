@@ -2,9 +2,13 @@ package com.communication.pingyi.tools
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.webkit.JavascriptInterface
 import com.communication.lib_http.base.MMKVTool
 import com.communication.pingyi.activity.LoginActivity
+import io.rong.imkit.utils.RouteUtils
+import io.rong.imlib.model.Conversation
+import io.rong.imlib.model.ConversationIdentifier
 
 class AndroidActivityJavascriptInterface(activity : Activity) {
     private var context : Activity
@@ -47,10 +51,13 @@ class AndroidActivityJavascriptInterface(activity : Activity) {
         return MMKVTool.getUsername()
     }
 
-//    @JavascriptInterface
-//    fun getLocal(): String {
-//        return webviewActivity.getLocationLL()
-//    }
+    @JavascriptInterface
+    fun getGroupId(groupId : String){
+        val targetId = groupId
+        val bundle = Bundle()
+        val conversationIdentifier = ConversationIdentifier(Conversation.ConversationType.GROUP, targetId);
+        RouteUtils.routeToConversationActivity(context, conversationIdentifier, false, bundle)
+    }
 
 
 }

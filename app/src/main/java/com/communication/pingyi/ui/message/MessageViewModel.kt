@@ -77,7 +77,7 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
             }else if (result is NetResult.Error){
                 result.exception.let {
                     if(!it.msg.contains("解析错误")) {
-                        messageError.postValue(it.msg)
+//                        messageError.postValue(it.msg)
                     }
                 }
             }
@@ -91,8 +91,16 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
     }
 
     fun unreadCount(eventCount : Int,alarmCount : Int,msgCount : Int){
-        if (eventCount != -1 && alarmCount != -1 && msgCount != -1) {
-            LiveEventBus.get(EVENTBUS_UNREAD_MESSAGE).post(eventCount+alarmCount+msgCount)
+        if ((msgCount != -1 && alarmCount != -1) ||  (msgCount != -1 && eventCount != -1 )) {
+            var count : Int = 0
+            if (eventCount == -1){
+                count = alarmCount+msgCount
+            }else if(alarmCount == -1){
+                count = eventCount+msgCount
+            }else{
+                count = alarmCount + msgCount + eventCount
+            }
+            LiveEventBus.get(EVENTBUS_UNREAD_MESSAGE).post(count)
         }
     }
 

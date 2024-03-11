@@ -3,10 +3,12 @@ package com.communication.pingyi.ui.webview
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -48,6 +50,8 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
     lateinit var webview : WebView
 
+//    private val homeUrl = "http://192.168.120.40:9000/#/"
+//    private val homeUrl1 = "http://192.168.120.40:9000/#/index"
     private val homeUrl = "http://10.168.200.2:9883/#/"
     private val homeUrl1 = "http://10.168.200.2:9883/#/index"
 
@@ -150,16 +154,20 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
         val settings = webview.settings
         settings.javaScriptEnabled = true
         //自适应屏幕
-        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
+//        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
+        settings.useWideViewPort = true;
+        settings.loadWithOverviewMode = true;
         settings.loadWithOverviewMode = true
         settings.domStorageEnabled = true
         settings.databaseEnabled = true
         settings.javaScriptCanOpenWindowsAutomatically = true
-        settings.setSupportZoom(false)
+        settings.cacheMode = WebSettings.LOAD_NO_CACHE
+
+        settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+
+        settings.setSupportZoom(true)
         webview.addJavascriptInterface(AndroidJavascriptInterface(requireActivity().applicationContext), "Android")
         webview.webViewClient = webviewClient
-        webview.isHorizontalScrollBarEnabled = false
-        webview.isVerticalScrollBarEnabled = false
         webview.webChromeClient = webViewChromeClient
 
         webview.loadUrl(homeUrl)
@@ -209,6 +217,18 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
             }
             return true
         }
+
+//        override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+//            super.onShowCustomView(view, callback)
+//            // 进入全屏播放模式
+//            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+//            // 将全屏视图添加到视图中
+//            fullscreenContainer.addView(view);
+//            // 隐藏其他界面元素
+//            webview.setVisibility(View.GONE);
+//            // 设置全屏标志位
+//            isFullscreen = true;
+//        }
     }
 
     /**

@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_group_message"
             android:layout_marginEnd="@dimen/dp12"
+            android:padding="@dimen/dp10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rl_message_type"
             app:layout_constraintBottom_toBottomOf="@+id/tv_stakeno"

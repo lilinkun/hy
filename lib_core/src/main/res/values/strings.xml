@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">衡永数字高速</string>
+    <string name="app_name_hengyong">衡永数字高速</string>
 
     <string name="login">登录</string>
     <string name="login_account_hint">请输入手机号</string>
@@ -17,6 +18,7 @@
     <string name="save">保存</string>
     <string name="input">提交</string>
     <string name="contact_search">搜索联系人</string>
+    <string name="sure_exit">确定退出?</string>
 
 
     <!--首页-->

@@ -5,8 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.communication.lib_core.tools.EVENTBUS_ALARM_CLICK
+import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_http.httpdata.message.AlarmTodoBean
 import com.communication.pingyi.databinding.ItemAlarmBinding
+import com.jeremyliao.liveeventbus.LiveEventBus
 
 class AlarmAdapter : ListAdapter<AlarmTodoBean, RecyclerView.ViewHolder>(AlarmDiffCallback()) {
 
@@ -31,6 +34,11 @@ class AlarmAdapter : ListAdapter<AlarmTodoBean, RecyclerView.ViewHolder>(AlarmDi
         fun bind(item: AlarmTodoBean) {
             binding.apply {
                 message = item
+                setClickListener {
+
+                    LiveEventBus.get(EVENTBUS_ALARM_CLICK).post(item.id)
+
+                }
                 executePendingBindings()
             }
         }

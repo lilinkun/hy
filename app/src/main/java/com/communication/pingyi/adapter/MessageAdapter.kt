@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.communication.lib_core.tools.EVENTBUS_GROUP_CLICK
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_http.httpdata.message.EventTodoBean
 import com.communication.pingyi.databinding.ItemMessageBinding
@@ -46,6 +47,10 @@ class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(Messag
 //                }else{
 //                    ivCircle.visibility = View.GONE
 //                }
+                ivGroupMessage.setOnClickListener {
+                    LiveEventBus.get(EVENTBUS_GROUP_CLICK).post(item.groupId)
+                }
+
                 setClickListener {
 //                    if (checkDoubleClick()) {
 //                        if(item.isRead == 0) {

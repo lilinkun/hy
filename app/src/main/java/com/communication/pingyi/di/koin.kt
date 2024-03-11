@@ -13,6 +13,8 @@ import com.communication.pingyi.ui.me.me.MeRepository
 import com.communication.pingyi.ui.me.me.MeViewModel
 import com.communication.pingyi.ui.message.MessageRepository
 import com.communication.pingyi.ui.message.MessageViewModel
+import com.communication.pingyi.ui.message.message.ChatRepository
+import com.communication.pingyi.ui.message.message.ChatViewModel
 import com.communication.pingyi.ui.update_version.UpdateVersionRepository
 import com.communication.pingyi.ui.update_version.UpdateVersionViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -33,6 +35,7 @@ val viewModelModule = module {
     viewModel { ContactViewModel(get()) }
     viewModel { ChangePwdViewModel(get()) }
     viewModel { UpdateVersionViewModel(get()) }
+    viewModel { ChatViewModel(get()) }
 
 }
 
@@ -44,6 +47,7 @@ val repositoryModule = module {
     single { ContactRepository(get()) }
     single { ChangePwdRepository(get()) }
     single { UpdateVersionRepository(get()) }
+    single { ChatRepository(get()) }
 }
 
 val allModule = listOf(viewModelModule,repositoryModule,httpModule)

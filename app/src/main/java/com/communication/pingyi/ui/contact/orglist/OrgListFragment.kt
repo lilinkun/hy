@@ -143,15 +143,22 @@ class OrgListFragment : BaseFragment<FragmentOrglistBinding>(){
             org_user.observe(viewLifecycleOwner){
 
                 org_user.value?.apply {
-                    orgList = it.trees
-                    binding.rvContactItem.visibility = View.VISIBLE
-                    mContactItemAdapter.submitList(orgList)
-                    mContactItemAdapter.notifyDataSetChanged()
 
-                    userList = it.users
-                    binding.rvContactUserItem.visibility = View.VISIBLE
-                    mContactUserAdapter.submitList(userList)
-                    mContactUserAdapter.notifyDataSetChanged()
+                    if (it?.trees == null){
+                        binding.rvContactItem.visibility = View.GONE
+                    }else{
+                        orgList = it.trees
+                        binding.rvContactItem.visibility = View.VISIBLE
+                        mContactItemAdapter.submitList(orgList)
+                    }
+
+                    if (it?.users == null) {
+                        binding.rvContactUserItem.visibility = View.GONE
+                    }else{
+                        userList = it.users
+                        binding.rvContactUserItem.visibility = View.VISIBLE
+                        mContactUserAdapter.submitList(userList)
+                    }
                 }
 
 

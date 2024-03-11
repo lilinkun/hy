@@ -4,12 +4,13 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.communication.pingyi.ui.message.alarm.AlarmFragment
 import com.communication.pingyi.ui.message.event.EventFragment
+import com.communication.pingyi.ui.message.message.MessageListFragment
 import io.rong.imkit.conversationlist.ConversationListFragment
 
 class MessagePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
-        0 to { ConversationListFragment() },
+        0 to { MessageListFragment() },
         1 to { EventFragment() },
         2 to { AlarmFragment() }
     )

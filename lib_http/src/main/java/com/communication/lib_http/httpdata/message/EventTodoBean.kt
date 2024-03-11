@@ -27,5 +27,6 @@ data class EventTodoBean(
     val readFlag: String,
     val reportedBy: String,
     val reportedTime: String,
-    val imgUrl : String
+    val imgUrl : String,
+    val groupId : String
 )

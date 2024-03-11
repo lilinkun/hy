@@ -35,9 +35,11 @@ const val SERVER_BASE_URL = "http://10.168.200.3:8080"
 //const val WEB_EVENT = "http://192.168.40.94:8080/#/event/overview"
 //const val WEB_RUNTIME = "http://192.168.40.94:8080/#/runtime/overview"
 //const val WEB_MESSAGE = "http://192.168.40.94:8080/#/event/detail?id="
-const val WEB_EVENT = "http://192.168.40.141:8200/#/event/overview"
+const val WEB_EVENT = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
+const val WEB_ALARM = "http://10.168.200.2:9883/#/alarmDetial?id="
 const val WEB_RUNTIME = "http://192.168.40.141:8200/#/runtime/overview"
-const val WEB_MESSAGE = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
+//const val WEB_MESSAGE = "http://192.168.120.40:9000/#/eventAssignDetails?eventId="
+//const val WEB_MESSAGE = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
 
 const val TIME_OUT = 15L
 
@@ -112,5 +114,9 @@ val httpModule = module {
 
     single<VersionApi> {
         get <Retrofit>().create(VersionApi::class.java)
+    }
+
+    single<ChatApi> {
+        get <Retrofit>().create(ChatApi::class.java)
     }
 }

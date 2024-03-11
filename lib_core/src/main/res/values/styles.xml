@@ -51,6 +51,28 @@
     </style>
 
 
+    <style name="Hy.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="Hy.Card" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/dp8</item>
+        <item name="cornerSizeTopRight">@dimen/dp8</item>
+        <item name="cornerSizeBottomRight">@dimen/dp8</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp8</item>
+    </style>
+
     <style name="Py.Blue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blue</item>

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
@@ -178,6 +179,8 @@ class WebviewActivity : BaseActivity() {
             }
             return true
         }
+
+
     }
 
     /**
