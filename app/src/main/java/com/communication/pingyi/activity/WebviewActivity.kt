@@ -188,7 +188,7 @@ class WebviewActivity : BaseActivity() {
      */
     private fun showSelectDialog() {
         if (mSelectPhotoDialog == null) {
-            mSelectPhotoDialog = SelectDialog(this) { view ->
+            mSelectPhotoDialog = SelectDialog(this,0) { view ->
                 when (view.id) {
                     R.id.tv_camera -> startCamera()
                     R.id.tv_photo -> startAlbum()

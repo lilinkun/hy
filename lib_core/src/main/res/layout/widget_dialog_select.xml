@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:gravity="center"
-            android:text="拍照"
+            android:text="@string/take_photo"
             android:textColor="#ff0095de"
             android:textSize="19sp" />
 

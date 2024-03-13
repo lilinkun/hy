@@ -31,6 +31,7 @@ import com.communication.pingyi.R
 import com.communication.pingyi.base.AppContext.getSystemService
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentWebviewBinding
+import com.communication.pingyi.ext.pyToast
 import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.tools.AndroidJavascriptInterface
 import com.communication.pingyi.tools.PhotoUtils
@@ -54,6 +55,8 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 //    private val homeUrl1 = "http://192.168.120.40:9000/#/index"
     private val homeUrl = "http://10.168.200.2:9883/#/"
     private val homeUrl1 = "http://10.168.200.2:9883/#/index"
+
+    var type : Int = 0
 
     private val args: WebviewFragmentArgs by navArgs()
 
@@ -113,17 +116,28 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PhotoUtils.RESULT_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
+        if ((requestCode == PhotoUtils.RESULT_CODE_CAMERA || requestCode == PhotoUtils.RESULT_CODE_VIDEO_CAMERA) && resultCode == Activity.RESULT_OK) {
             //拍照并确定
-            compressPicture(PhotoUtils.PATH_PHOTO)
-        } else if (requestCode == PhotoUtils.RESULT_CODE_PHOTO && resultCode == Activity.RESULT_OK) {
+            if (requestCode == PhotoUtils.RESULT_CODE_CAMERA){
+                compressPicture(PhotoUtils.PATH_PHOTO)
+            }else{
+                val file = File(PhotoUtils.PATH_PHOTO)
+                mFilePathCallback?.onReceiveValue(arrayOf(Uri.fromFile(file)))
+            }
+
+        }else if ((requestCode == PhotoUtils.RESULT_CODE_PHOTO || requestCode == PhotoUtils.RESULT_CODE_VIDEO) && resultCode == Activity.RESULT_OK) {
             //相册选择并确定
             val result = data?.data
             val path = result?.let { activity?.let { it1 -> PhotoUtils.getPath(it1, it) } }
             if (path == null) {
                 mFilePathCallback?.onReceiveValue(null)
             } else {
-                compressPicture(path)
+                if (requestCode == PhotoUtils.RESULT_CODE_PHOTO){
+                    compressPicture(path)
+                }else{
+                    val file = File(path)
+                    mFilePathCallback?.onReceiveValue(arrayOf(Uri.fromFile(file)))
+                }
             }
         } else {
             mFilePathCallback?.onReceiveValue(null)
@@ -213,6 +227,10 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
             mFilePathCallback = filePathCallback
             val acceptTypes = fileChooserParams.acceptTypes
             if (acceptTypes.contains("image/*")) {
+                type = 0
+                showSelectDialog()
+            }else if(acceptTypes.contains("video/*")){
+                type = 1
                 showSelectDialog()
             }
             return true
@@ -236,10 +254,10 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
      */
     private fun showSelectDialog() {
         if (mSelectPhotoDialog == null) {
-            mSelectPhotoDialog = SelectDialog(this.requireActivity()) { view ->
+            mSelectPhotoDialog = SelectDialog(this.requireActivity(),type) { view ->
                 when (view.id) {
-                    R.id.tv_camera -> startCamera()
-                    R.id.tv_photo -> startAlbum()
+                    R.id.tv_camera -> startCamera(type)
+                    R.id.tv_photo -> startAlbum(type)
                     //不管选择还是不选择，必须有返回结果，否则就会调用一次
                     R.id.tv_cancel -> {
                         mFilePathCallback?.onReceiveValue(null)
@@ -247,6 +265,8 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
                     }
                 }
             }
+        }else{
+            mSelectPhotoDialog!!.setType(type)
         }
         mSelectPhotoDialog?.show()
     }
@@ -255,15 +275,22 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
     /**
      * 打开相册
      */
-    private fun startAlbum() {
-        activity?.let { PhotoUtils.startAlbum(it) }
+    private fun startAlbum(type: Int) {
+//        activity?.let { PhotoUtils.startAlbum(it) }
+
+        PhotoUtils.startAlbum(this,type)
     }
 
     /**
      * 拍照
      */
-    fun startCamera() {
-        activity?.let { PhotoUtils.startCamera(it) }
+    fun startCamera(type: Int) {
+//        activity?.let { PhotoUtils.startCamera(it) }
+        if(type == 0){
+            PhotoUtils.startCamera(this)
+        }else{
+            PhotoUtils.startVideoCamera(this)
+        }
     }
 
 

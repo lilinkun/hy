@@ -11,11 +11,13 @@ import android.widget.TextView
  * on 2022/4/14  16:54
  * Description：
  */
-class SelectDialog(context: Context, private val mListener: View.OnClickListener?) : Dialog(context, R.style.popup_dialog_anim) {
+class SelectDialog(context: Context,type : Int, private val mListener: View.OnClickListener?) : Dialog(context, R.style.popup_dialog_anim) {
 
     private lateinit var tvPhoto: TextView
     private lateinit var tvCamera: TextView
     private lateinit var tvCancel: TextView
+
+    private var type : Int = type
 
     init {
         init(context)
@@ -27,6 +29,11 @@ class SelectDialog(context: Context, private val mListener: View.OnClickListener
         val view = View.inflate(context, R.layout.widget_dialog_select, null)
         setContentView(view)
         init(view)
+    }
+
+    fun setType(types : Int){
+        type = types
+        setType()
     }
 
     private fun init(view: View) {
@@ -53,5 +60,20 @@ class SelectDialog(context: Context, private val mListener: View.OnClickListener
         params.alpha = 1.0f
         params.width = screenWidth
         window.attributes = params
+
+        if (type == 0){
+            tvCamera.text = context.resources.getText(R.string.take_photo)
+        }else{
+            tvCamera.text = context.resources.getText(R.string.take_video)
+        }
+        setType()
+    }
+
+    private fun setType(){
+        if (type == 0){
+            tvCamera.text = context.resources.getText(R.string.take_photo)
+        }else{
+            tvCamera.text = context.resources.getText(R.string.take_video)
+        }
     }
 }

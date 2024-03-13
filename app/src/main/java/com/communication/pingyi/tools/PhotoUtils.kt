@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.communication.pingyi.ui.webview.WebviewFragment
 import top.zibin.luban.Luban
 import top.zibin.luban.OnCompressListener
@@ -27,6 +28,8 @@ object PhotoUtils {
 
     const val RESULT_CODE_CAMERA = 0x02
     const val RESULT_CODE_PHOTO = 0x04
+    const val RESULT_CODE_VIDEO = 0X05
+    const val RESULT_CODE_VIDEO_CAMERA = 0x06
 
     lateinit var PATH_PHOTO: String
 
@@ -58,6 +61,60 @@ object PhotoUtils {
     }
 
     /**
+     * 拍照
+     * @param context Activity
+     */
+    fun startCamera(context: Fragment) {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        PATH_PHOTO = getSdCardDirectory(context.requireContext()) + "/temp.png"
+        val temp = File(PATH_PHOTO)
+        if (!temp.parentFile.exists()) {
+            temp.parentFile.mkdirs()
+        }
+        if (temp.exists()) {
+            temp.delete()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            // 通过FileProvider创建一个content类型的Uri
+            val uri: Uri = FileProvider.getUriForFile(context.requireContext(), context.requireContext().packageName + ".fileprovider", temp)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+        } else {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(temp))
+        }
+        context.startActivityForResult(intent, RESULT_CODE_CAMERA)
+    }
+
+    /**
+     * 拍视频
+     * @param context Activity
+     */
+    fun startVideoCamera(context: Fragment) {
+        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        PATH_PHOTO = getSdCardDirectory(context.requireContext()) + "/temp.mp4"
+        val temp = File(PATH_PHOTO)
+        if (!temp.parentFile.exists()) {
+            temp.parentFile.mkdirs()
+        }
+        if (temp.exists()) {
+            temp.delete()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            // 通过FileProvider创建一个content类型的Uri
+            val uri: Uri = FileProvider.getUriForFile(context.requireContext(), context.requireContext().packageName + ".fileprovider", temp)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+        } else {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(temp))
+        }
+        context.startActivityForResult(intent, RESULT_CODE_VIDEO_CAMERA)
+    }
+
+    /**
      * 打开相册
      * @param context Activity
      */
@@ -66,6 +123,22 @@ object PhotoUtils {
         albumIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
         context.startActivityForResult(albumIntent, RESULT_CODE_PHOTO)
+    }
+
+    /**
+     * 打开相册
+     * @param context Activity
+     */
+    fun startAlbum(context: Fragment,type : Int) {
+        val albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        albumIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        if (type == 0){
+            albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+            context.startActivityForResult(albumIntent, RESULT_CODE_PHOTO)
+        }else{
+            albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "video/*")
+            context.startActivityForResult(albumIntent, RESULT_CODE_VIDEO)
+        }
     }
 
     abstract class OnPictureCompressListener {
@@ -107,17 +180,18 @@ object PhotoUtils {
     fun getSdCardDirectory(context: Context): String {
         var sdDir: File? = null
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            sdDir = Environment.getExternalStorageDirectory()
+//            sdDir = Environment.getExternalStorageDirectory()
+            sdDir = context.getExternalCacheDir()
         } else {
             sdDir = context.cacheDir
         }
-        sdDir = context.cacheDir
         val cacheDir = File(sdDir, "pingyi")
         if (!cacheDir.exists()) {
             cacheDir.mkdirs()
         }
         return cacheDir.path
     }
+
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun getPath(context: Context, uri: Uri): String? {

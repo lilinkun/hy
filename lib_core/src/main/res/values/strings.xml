@@ -94,6 +94,9 @@
     <string name="location_ok">马上开启</string>
     <string name="location_cancel">下次再说</string>
 
+    <string name="take_photo">拍照</string>
+    <string name="take_video">拍视频</string>
+
 
     <!--事件-->
     <string name="instruct">指令</string>
