@@ -3,7 +3,6 @@ package com.communication.pingyi.ui.webview
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationManager
@@ -12,6 +11,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
@@ -19,8 +21,9 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.navArgs
 import com.communication.lib_core.PyAppDialog
 import com.communication.lib_core.SelectDialog
@@ -31,7 +34,6 @@ import com.communication.pingyi.R
 import com.communication.pingyi.base.AppContext.getSystemService
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentWebviewBinding
-import com.communication.pingyi.ext.pyToast
 import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.tools.AndroidJavascriptInterface
 import com.communication.pingyi.tools.PhotoUtils
@@ -50,6 +52,10 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
     private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
 
     lateinit var webview : WebView
+    private var webRoot: ConstraintLayout? = null// 显示全屏视频的布局
+    private var mCustomViewCallback: WebChromeClient.CustomViewCallback? = null
+
+    private var mCustomView: View? = null //全屏渲染视频的View
 
 //    private val homeUrl = "http://192.168.120.40:9000/#/"
 //    private val homeUrl1 = "http://192.168.120.40:9000/#/index"
@@ -71,6 +77,9 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
                 }
             }
         }
+
+        requireActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
     }
 
     override fun initView() {
@@ -165,6 +174,8 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
     private fun initWebView(){
         webview = binding.webView
 
+        webRoot = binding.clWebview
+
         val settings = webview.settings
         settings.javaScriptEnabled = true
         //自适应屏幕
@@ -243,10 +254,58 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 //            // 将全屏视图添加到视图中
 //            fullscreenContainer.addView(view);
 //            // 隐藏其他界面元素
-//            webview.setVisibility(View.GONE);
+//            webview.setVisibility(View.GONE)
 //            // 设置全屏标志位
-//            isFullscreen = true;
+//            isFullscreen = true
 //        }
+
+        override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+            super.onShowCustomView(view, callback)
+            if (mCustomViewCallback != null) {
+                mCustomViewCallback!!.onCustomViewHidden()
+                mCustomViewCallback = null
+                return
+            }
+            requireActivity().getWindow().addFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+
+//            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+            val parent = webview.getParent() as ViewGroup
+            parent.visibility = View.GONE
+            (parent.parent as ViewGroup).addView(
+                view,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
+            mCustomView = view
+            mCustomViewCallback = callback
+        }
+
+        override fun onHideCustomView() {
+            super.onHideCustomView()
+            if (mCustomView != null) {
+                if (mCustomViewCallback != null) {
+                    mCustomViewCallback!!.onCustomViewHidden()
+                    mCustomViewCallback = null
+                }
+                requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                if (mCustomView != null && mCustomView!!.parent != null) {
+                    val parent = mCustomView!!.parent as ViewGroup
+                    parent.removeView(mCustomView)
+                    if (webview.getParent() != null) {
+                        val parent2 = webview.getParent() as ViewGroup
+                        parent2.visibility = View.VISIBLE
+                    }
+                }
+                mCustomView = null
+
+                mFilePathCallback = null
+            }
+        }
+
     }
 
     /**
@@ -295,6 +354,7 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
 
     override fun onDestroy() {
+
         webview.stopLoading()
         webview.onPause()
         webview.settings.javaScriptEnabled = false
