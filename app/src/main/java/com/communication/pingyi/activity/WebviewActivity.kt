@@ -11,11 +11,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebSettings.LayoutAlgorithm.SINGLE_COLUMN
 import android.webkit.WebView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.communication.lib_core.PyAppDialog
 import com.communication.lib_core.PyLoad
 import com.communication.lib_core.SelectDialog
@@ -45,6 +48,12 @@ class WebviewActivity : BaseActivity() {
 
     lateinit var webView : WebView
     lateinit var progressBar : PyLoad
+
+
+    private var webRoot: ConstraintLayout? = null// 显示全屏视频的布局
+    private var mCustomViewCallback: WebChromeClient.CustomViewCallback? = null
+
+    private var mCustomView: View? = null //全屏渲染视频的View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -178,6 +187,53 @@ class WebviewActivity : BaseActivity() {
                 showSelectDialog()
             }
             return true
+        }
+
+        override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+            super.onShowCustomView(view, callback)
+            if (mCustomViewCallback != null) {
+                mCustomViewCallback!!.onCustomViewHidden()
+                mCustomViewCallback = null
+                return
+            }
+            getWindow().addFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+
+//            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+            val parent = webView.getParent() as ViewGroup
+            parent.visibility = View.GONE
+            (parent.parent as ViewGroup).addView(
+                view,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
+            mCustomView = view
+            mCustomViewCallback = callback
+        }
+
+        override fun onHideCustomView() {
+            super.onHideCustomView()
+            if (mCustomView != null) {
+                if (mCustomViewCallback != null) {
+                    mCustomViewCallback!!.onCustomViewHidden()
+                    mCustomViewCallback = null
+                }
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                if (mCustomView != null && mCustomView!!.parent != null) {
+                    val parent = mCustomView!!.parent as ViewGroup
+                    parent.removeView(mCustomView)
+                    if (webView.getParent() != null) {
+                        val parent2 = webView.getParent() as ViewGroup
+                        parent2.visibility = View.VISIBLE
+                    }
+                }
+                mCustomView = null
+
+                mFilePathCallback = null
+            }
         }
 
 

@@ -204,7 +204,6 @@ class MainActivity : BaseActivity() {
 
                     }else{
 
-
                         val currentVersionCode =  Utils.getVersionCode(this).toString()
                         mLoginInfo = LoginInfo(
                             MMKVTool.getBrand(), MMKVTool.getUsername(),MMKVTool.getPassword(),
