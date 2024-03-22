@@ -5,7 +5,9 @@
     <string name="app_name_hengyong">衡永数字高速</string>
 
     <string name="login">登录</string>
-    <string name="login_account_hint">请输入手机号</string>
+    <string name="login_account">用户名</string>
+    <string name="login_account_hint">请输入用户名</string>
+    <string name="login_password">密码</string>
     <string name="login_password_hint">请输入密码</string>
     <string name="login_verify_hint">请输入验证码</string>
     <string name="error_fun_empty">功能暂未提供</string>

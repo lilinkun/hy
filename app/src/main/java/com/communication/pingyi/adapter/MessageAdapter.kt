@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.communication.lib_core.tools.EVENTBUS_GROUP_CLICK
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_CLICK
 import com.communication.lib_http.httpdata.message.EventTodoBean
+import com.communication.pingyi.R
 import com.communication.pingyi.databinding.ItemMessageBinding
 import com.jeremyliao.liveeventbus.LiveEventBus
+import extension.globalContext
 
 class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(MessageDiffCallback()) {
 
@@ -49,6 +52,14 @@ class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(Messag
 //                }
                 ivGroupMessage.setOnClickListener {
                     LiveEventBus.get(EVENTBUS_GROUP_CLICK).post(item.groupId)
+                }
+
+                if (!item.imgUrl.isNullOrEmpty()) {
+                    Glide.with(root.context)
+                        .load(item.imgUrl)
+                        .error(R.drawable.ic_default_img)
+                        .into(ivMessageType)
+
                 }
 
                 setClickListener {

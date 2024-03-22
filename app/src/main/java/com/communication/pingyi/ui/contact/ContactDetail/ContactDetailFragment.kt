@@ -81,7 +81,7 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
                     RongCallKit.startSingleCall(
                         activity,
                         contactBean.sysUserName,
-                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_VIDEO
+                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_AUDIO
                     );
                 }else{
                     pyToast("此人无即时通讯功能")
@@ -93,7 +93,7 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
                     RongCallKit.startSingleCall(
                         activity,
                         contactBean.sysUserName,
-                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_AUDIO
+                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_VIDEO
                     );
                 }else{
                     pyToast("此人无即时通讯功能")

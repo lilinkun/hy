@@ -42,7 +42,6 @@
             android:textSize="14sp"
             android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_default_img"
-            android:src="@{message.imgUrl}"
             />
 
         <com.communication.lib_core.TextViewYH

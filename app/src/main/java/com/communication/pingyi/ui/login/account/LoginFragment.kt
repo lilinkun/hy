@@ -2,9 +2,11 @@ package com.communication.pingyi.ui.login.account
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Base64
 import android.util.Base64.NO_WRAP
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.Lifecycle
 import com.bumptech.glide.Glide
 import com.communication.lib_core.EditTextYH
@@ -40,6 +42,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     lateinit var sign : String;
 
     lateinit var someMonitor : SomeMonitorEditText
+
+    lateinit var etPassword : EditTextYH
+    lateinit var ivPassword : ImageView
 
     override fun getLayoutResId(): Int = R.layout.fragment_login
 
@@ -109,7 +114,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             edits.add(it.etUsername)
             edits.add(it.etPassword)
 
+            etPassword = it.etPassword
+            ivPassword = it.ivPassword
+
             someMonitor = SomeMonitorEditText(it.btnLogin,edits)
+
+            ivPassword.setOnClickListener {
+                if (etPassword.getTransformationMethod() is PasswordTransformationMethod) {
+                    // 密码不可见，变为可见
+                    etPassword.setTransformationMethod(null)
+                    ivPassword.setImageResource(R.drawable.ic_show_psd)
+
+                } else {
+                    // 密码可见，变为不可见
+                    etPassword.setTransformationMethod(PasswordTransformationMethod())
+                    ivPassword.setImageResource(R.drawable.ic_hidden_psd)
+                }
+
+                // 光标定位到文本末尾，便于继续输入
+
+                // 光标定位到文本末尾，便于继续输入
+                etPassword.getText()?.let { it1 -> etPassword.setSelection(it1.length) }
+            }
 
         }
 
