@@ -55,6 +55,8 @@ class WebviewActivity : BaseActivity() {
 
     private var mCustomView: View? = null //全屏渲染视频的View
 
+    var type : Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
@@ -116,17 +118,27 @@ class WebviewActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PhotoUtils.RESULT_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
+        if ((requestCode == PhotoUtils.RESULT_CODE_CAMERA || requestCode == PhotoUtils.RESULT_CODE_VIDEO_CAMERA) && resultCode == Activity.RESULT_OK) {
             //拍照并确定
-            compressPicture(PhotoUtils.PATH_PHOTO)
-        } else if (requestCode == PhotoUtils.RESULT_CODE_PHOTO && resultCode == Activity.RESULT_OK) {
+            if (requestCode == PhotoUtils.RESULT_CODE_CAMERA){
+                compressPicture(PhotoUtils.PATH_PHOTO)
+            }else{
+                val file = File(PhotoUtils.PATH_PHOTO)
+                mFilePathCallback?.onReceiveValue(arrayOf(Uri.fromFile(file)))
+            }
+        }else if ((requestCode == PhotoUtils.RESULT_CODE_PHOTO || requestCode == PhotoUtils.RESULT_CODE_VIDEO) && resultCode == Activity.RESULT_OK) {
             //相册选择并确定
             val result = data?.data
             val path = result?.let { PhotoUtils.getPath(this, it) }
             if (path == null) {
                 mFilePathCallback?.onReceiveValue(null)
             } else {
-                compressPicture(path)
+                if (requestCode == PhotoUtils.RESULT_CODE_PHOTO){
+                    compressPicture(path)
+                }else{
+                    val file = File(path)
+                    mFilePathCallback?.onReceiveValue(arrayOf(Uri.fromFile(file)))
+                }
             }
         } else {
             mFilePathCallback?.onReceiveValue(null)
@@ -184,6 +196,10 @@ class WebviewActivity : BaseActivity() {
             mFilePathCallback = filePathCallback
             val acceptTypes = fileChooserParams.acceptTypes
             if (acceptTypes.contains("image/*")) {
+                type = 0
+                showSelectDialog()
+            }else if(acceptTypes.contains("video/*")){
+                type = 1
                 showSelectDialog()
             }
             return true
@@ -244,10 +260,10 @@ class WebviewActivity : BaseActivity() {
      */
     private fun showSelectDialog() {
         if (mSelectPhotoDialog == null) {
-            mSelectPhotoDialog = SelectDialog(this,0) { view ->
+            mSelectPhotoDialog = SelectDialog(this,type) { view ->
                 when (view.id) {
-                    R.id.tv_camera -> startCamera()
-                    R.id.tv_photo -> startAlbum()
+                    R.id.tv_camera -> startCamera(type)
+                    R.id.tv_photo -> startAlbum(type)
                     //不管选择还是不选择，必须有返回结果，否则就会调用一次
                     R.id.tv_cancel -> {
                         mFilePathCallback?.onReceiveValue(null)
@@ -255,6 +271,8 @@ class WebviewActivity : BaseActivity() {
                     }
                 }
             }
+        }else{
+            mSelectPhotoDialog!!.setType(type)
         }
         mSelectPhotoDialog?.show()
     }
@@ -263,15 +281,22 @@ class WebviewActivity : BaseActivity() {
     /**
      * 打开相册
      */
-    private fun startAlbum() {
-         PhotoUtils.startAlbum(this)
+    private fun startAlbum(type: Int) {
+//        activity?.let { PhotoUtils.startAlbum(it) }
+
+        PhotoUtils.startAlbum(type,this)
     }
 
     /**
      * 拍照
      */
-    fun startCamera() {
-        PhotoUtils.startCamera(this)
+    fun startCamera(type: Int) {
+//        activity?.let { PhotoUtils.startCamera(it) }
+        if(type == 0){
+            PhotoUtils.startCamera(this)
+        }else{
+            PhotoUtils.startVideoCamera(this)
+        }
     }
 
 

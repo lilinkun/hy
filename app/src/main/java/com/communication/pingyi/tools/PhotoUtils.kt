@@ -115,14 +115,46 @@ object PhotoUtils {
     }
 
     /**
+     * 拍视频
+     * @param context Activity
+     */
+    fun startVideoCamera(context: Activity) {
+        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        PATH_PHOTO = getSdCardDirectory(context) + "/temp.mp4"
+        val temp = File(PATH_PHOTO)
+        if (!temp.parentFile.exists()) {
+            temp.parentFile.mkdirs()
+        }
+        if (temp.exists()) {
+            temp.delete()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            // 通过FileProvider创建一个content类型的Uri
+            val uri: Uri = FileProvider.getUriForFile(context, context.packageName + ".fileprovider", temp)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+        } else {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(temp))
+        }
+        context.startActivityForResult(intent, RESULT_CODE_VIDEO_CAMERA)
+    }
+
+    /**
      * 打开相册
      * @param context Activity
      */
-    fun startAlbum(context: Activity) {
+    fun startAlbum(type : Int,context: Activity) {
         val albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         albumIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-        context.startActivityForResult(albumIntent, RESULT_CODE_PHOTO)
+        if (type == 0){
+            albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+            context.startActivityForResult(albumIntent, RESULT_CODE_PHOTO)
+        }else{
+            albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "video/*")
+            context.startActivityForResult(albumIntent, RESULT_CODE_VIDEO)
+        }
     }
 
     /**

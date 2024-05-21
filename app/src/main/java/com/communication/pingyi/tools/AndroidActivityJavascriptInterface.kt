@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.webkit.JavascriptInterface
 import com.communication.lib_http.base.MMKVTool
 import com.communication.pingyi.activity.LoginActivity
+import com.communication.pingyi.ext.pyToast
 import io.rong.imkit.utils.RouteUtils
 import io.rong.imlib.model.Conversation
 import io.rong.imlib.model.ConversationIdentifier
@@ -28,7 +29,6 @@ class AndroidActivityJavascriptInterface(activity : Activity) {
             intent.putExtra("name",name)
             context.startActivity(intent)
             ActivityUtil.finishAll()
-
         }
     }
 

@@ -236,7 +236,7 @@ class HomeMessageFragment : BaseFragment<FragmentHomeMessageBinding>() , OnRefre
 
     private fun getTabTitle(position: Int): String? {
         return when (position) {
-            0 -> "IM消息"
+            0 -> "消息"
             1 -> "待办事件"
             2 -> "待办告警"
             else -> ""

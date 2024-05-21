@@ -57,10 +57,10 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
     private var mCustomView: View? = null //全屏渲染视频的View
 
-//    private val homeUrl = "http://192.168.120.40:9000/#/"
-//    private val homeUrl1 = "http://192.168.120.40:9000/#/index"
-    private val homeUrl = "http://10.168.200.2:9883/#/"
-    private val homeUrl1 = "http://10.168.200.2:9883/#/index"
+    private val homeUrl = "http://43.246.96.50:9883/#/"
+    private val homeUrl1 = "http://43.246.96.50:9883/#/index"
+//    private val homeUrl = "http://10.168.200.2:9883/#/"
+//    private val homeUrl1 = "http://10.168.200.2:9883/#/index"
 
     var type : Int = 0
 
@@ -191,7 +191,7 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
         settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 
         settings.setSupportZoom(true)
-        webview.addJavascriptInterface(AndroidJavascriptInterface(requireActivity().applicationContext), "Android")
+        webview.addJavascriptInterface(AndroidJavascriptInterface(this), "Android")
         webview.webViewClient = webviewClient
         webview.webChromeClient = webViewChromeClient
 

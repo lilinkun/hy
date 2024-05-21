@@ -7,5 +7,6 @@ package com.communication.lib_http.httpdata.me
  */
 data class RolesBean(
     val roleName : String,
-    val remark : String
+    val remark : String,
+    val roleKey : String,
 )

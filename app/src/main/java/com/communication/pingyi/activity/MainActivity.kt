@@ -35,6 +35,7 @@ import com.communication.pingyi.ui.login.account.LoginViewModel
 import com.communication.pingyi.ui.main.MainFragment
 import com.communication.pingyi.ui.message.message.ChatViewModel
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.matt.linphonelibrary.core.ImManager
 import io.rong.imkit.GlideKitImageEngine
 import io.rong.imkit.IMCenter
 import io.rong.imkit.RongIM
@@ -171,6 +172,8 @@ class MainActivity : BaseActivity() {
 
         }
 
+
+        var imManager : ImManager = ImManager.getInstance()
 
 
         LiveEventBus.get(EVENTBUS_USER_INFO,PersonInfoBean::class.java).observe(this) {

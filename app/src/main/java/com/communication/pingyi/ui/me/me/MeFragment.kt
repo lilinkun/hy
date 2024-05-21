@@ -152,7 +152,9 @@ class MeFragment : BaseFragment<FragmentMeBinding>(), OnRefreshListener {
                         personalInfo = it
                         info = it
                         includeInfo.infoPhone.setContent(it.phonenumber)
-                        includeInfo.infoOrganization.setContent(it.dept.deptName)
+                        if (it.dept != null){
+                            includeInfo.infoOrganization.setContent(it.dept.deptName)
+                        }
                         if(it.roles.size > 0) {
                             includeInfo.infoJob.setContent(it.roles[0].roleName)
                         }

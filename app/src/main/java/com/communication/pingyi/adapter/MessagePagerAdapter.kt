@@ -11,6 +11,7 @@ class MessagePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         0 to { MessageListFragment() },
+//        0 to { MessageListFragment() },
         1 to { EventFragment() },
         2 to { AlarmFragment() }
     )

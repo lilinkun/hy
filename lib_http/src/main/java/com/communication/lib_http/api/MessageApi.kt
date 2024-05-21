@@ -34,6 +34,6 @@ interface MessageApi {
     ) : BaseModel<String>
 
 
-    @GET("$SERVER_BASE_URL/serviceArea/appServiceAlarm/getAppServiceAlarmInfoList")
+    @GET("$SERVER_BASE_URL/serviceArea/appServiceAlarm/getPendingAlarmInfoList")
     suspend fun getAlarmList(@Query("facilityCodeList")facilityCodeList : List<String>,@Query("pageNum") pageNum : Int,@Query("pageSize") pageSize : Int ) : BaseModelList<MutableList<AlarmTodoBean>>
 }

@@ -1,5 +1,6 @@
 package com.communication.pingyi.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -59,8 +60,18 @@ class MessageAdapter : ListAdapter<EventTodoBean,RecyclerView.ViewHolder>(Messag
                         .load(item.imgUrl)
                         .error(R.drawable.ic_default_img)
                         .into(ivMessageType)
-
                 }
+
+                var drawable :Drawable
+                if (item.eventSource.equals("manual")){
+                    drawable = root.context.getDrawable(R.drawable.ic_event_head)!!
+                }else{
+                    drawable = root.context.getDrawable(R.drawable.ic_event_automatic)!!
+                }
+
+                drawable.setBounds(0,0,drawable.minimumWidth,drawable.minimumHeight)
+                reportedBy.setCompoundDrawables(drawable,null,null,null)
+
 
                 setClickListener {
 //                    if (checkDoubleClick()) {

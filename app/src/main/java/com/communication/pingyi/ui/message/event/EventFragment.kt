@@ -130,4 +130,9 @@ class EventFragment : BaseFragment<FragmentMessageBinding>() , OnRefreshListener
         mViewModel.getMessageList()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mViewModel.getMessageList()
+    }
+
 }

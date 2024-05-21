@@ -22,27 +22,29 @@ import com.communication.pingyi.ui.webview.WebviewFragment
  * on 2022/3/31  17:22
  * Description：
  */
-class AndroidJavascriptInterface(context : Context) {
-    lateinit var context : Context
+class AndroidJavascriptInterface(context : Fragment) {
+    lateinit var fragment : Fragment
 
 
     init {
         if (context != null) {
-            this.context = context
+            this.fragment = context
         }
     }
 
     @JavascriptInterface
     fun goToLogin() {
-        if (context != null) {
+
+
+
+        if (fragment != null) {
             val name = MMKVTool.getUsername()
             MMKVTool.clearAll()
-            val intent = Intent(context, LoginActivity::class.java)
+            val intent = Intent(fragment.context, LoginActivity::class.java)
             MMKVTool.saveUsername(name)
             intent.putExtra("name",name)
-            context.startActivity(intent)
-            ActivityUtil.finishAll()
-
+            fragment.startActivity(intent)
+            (fragment as Activity ).finish()
         }
     }
 

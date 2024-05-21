@@ -46,7 +46,7 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
         LiveEventBus.get(EVENTBUS_USER_INFO, PersonInfoBean::class.java).observe(this) {
 
             it.roles.mapTo(listFacilityCodeList) {
-                it.remark
+                it.roleKey
             }
             alarmRequestBean = AlarmRequestBean(listFacilityCodeList, 1, 1000)
 
@@ -116,6 +116,14 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>() , OnRefreshListener,
                 }
             }
 
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (alarmRequestBean != null) {
+            mViewModel.getAlarmList(alarmRequestBean!!)
         }
     }
 

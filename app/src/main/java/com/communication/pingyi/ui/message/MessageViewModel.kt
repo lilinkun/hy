@@ -33,10 +33,6 @@ class MessageViewModel(private val repo : MessageRepository) : BaseViewModel() {
                 result.data?.let {
 
                     messageList.postValue(result.data)
-
-
-
-
                     LiveEventBus.get(EVENTBUS_EVENT_BADGE).post(it.count{ it.eventStatus == "untreated" })
 
                 }
