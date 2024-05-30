@@ -67,6 +67,34 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+       <!-- <action
+            android:id="@+id/action_mainFragment_to_callIncomingFragment"
+            app:destination="@id/callIncomingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_callOutgoingFragment"
+            app:destination="@id/callOutgoingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_callVideoFragment"
+            app:destination="@id/callVideoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_callVoiceFragment"
+            app:destination="@id/callVoiceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />-->
 
 
     </fragment>
@@ -220,8 +248,51 @@
         >
 
     </fragment>
+    <!--<fragment
+        android:id="@+id/callIncomingFragment"
+        android:name="com.communication.pingyi.ui.call.CallIncomingFragment"
+        android:label="CallIncomingFragment" >
 
+        <argument
+            android:name="number"
+            app:argType="string"/>
+        <argument
+            android:name="isVideo"
+            app:argType="boolean"/>
+        <argument
+            android:name="currentCall"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_callIncomingFragment_to_callVideoFragment"
+            app:destination="@id/callVideoFragment" />
+        <action
+            android:id="@+id/action_callIncomingFragment_to_callVoiceFragment"
+            app:destination="@id/callVoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/callOutgoingFragment"
+        android:name="com.communication.pingyi.ui.call.CallOutgoingFragment"
+        android:label="CallOutgoingFragment" />
+    <fragment
+        android:id="@+id/callVideoFragment"
+        android:name="com.communication.pingyi.ui.call.CallVideoFragment"
+        android:label="CallVideoFragment" >
+        <argument
+            android:name="number"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/callVoiceFragment"
+        android:name="com.communication.pingyi.ui.call.CallVoiceFragment"
+        android:label="CallVoiceFragment" >
 
+        <argument
+            android:name="number"
+            app:argType="string"/>
+        <argument
+            android:name="currentCall"
+            app:argType="integer"/>
+    </fragment>-->
 
 
 </navigation>

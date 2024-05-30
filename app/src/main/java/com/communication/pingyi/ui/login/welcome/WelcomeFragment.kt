@@ -32,9 +32,13 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(){
                     alphaObjectAnimator = ObjectAnimator.ofFloat(rlWelcome, "alpha", 1f, 0.3f)
                     alphaObjectAnimator.duration = 3000
                     alphaObjectAnimator.addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationStart(animation: Animator?) {
+                        override fun onAnimationStart(animation: Animator, isReverse: Boolean) {
                         }
-                        override fun onAnimationEnd(animation: Animator?) {
+
+                        override fun onAnimationStart(animation: Animator) {
+                        }
+
+                        override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
                             if (MMKVTool.getUsername().isBlank() || MMKVTool.getPassword().isBlank()) {
                                 navigateToLogin()
                             } else {
@@ -42,8 +46,16 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(){
                             }
                         }
 
-                        override fun onAnimationCancel(animation: Animator?) {}
-                        override fun onAnimationRepeat(animation: Animator?) {}
+                        override fun onAnimationEnd(animation: Animator) {
+                            if (MMKVTool.getUsername().isBlank() || MMKVTool.getPassword().isBlank()) {
+                                navigateToLogin()
+                            } else {
+                                goToMainActivity()
+                            }
+                        }
+
+                        override fun onAnimationCancel(animation: Animator) {}
+                        override fun onAnimationRepeat(animation: Animator) {}
                     })
 
                     alphaObjectAnimator.startDelay = 500

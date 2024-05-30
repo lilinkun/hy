@@ -15,7 +15,6 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 import com.scwang.smart.refresh.layout.wrapper.RefreshFooterWrapper
 import com.scwang.smart.refresh.layout.wrapper.RefreshHeaderWrapper
-import io.rong.imkit.RongIM
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -47,7 +46,6 @@ open class BaseApplication : Application(){
     private fun initIm(){
         val appKey = "vnroth0kvgx5o"
         val enablePush = true
-        RongIM.init(this,appKey, enablePush)
     }
 
 

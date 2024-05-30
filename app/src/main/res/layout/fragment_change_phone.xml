@@ -70,7 +70,7 @@
                 android:hint="请输入短信验证码"
                 android:layout_marginStart="@dimen/dp16"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/sight_text_size_14"
+                android:textSize="@dimen/text_size_14"
                 android:layout_toStartOf="@+id/code_line"
                 />
 
@@ -83,7 +83,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center"
                 android:textColor="@color/v_code_bg"
-                android:textSize="@dimen/sight_text_size_14"
+                android:textSize="@dimen/text_size_14"
                 android:layout_marginEnd="@dimen/dp10"
                 />
 

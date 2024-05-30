@@ -21,7 +21,6 @@ ext{
     libs = [
             stdlib                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20",
 
-
             //https
             loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:4.9.0",
             gson                  : "com.google.code.gson:gson:2.8.6",
@@ -70,12 +69,13 @@ ext{
 
     androidx = [
 
-            appcompat            : "androidx.appcompat:appcompat:1.2.0",
-            coreKtx              : "androidx.core:core-ktx:1.3.2",
+            appcompat            : "androidx.appcompat:appcompat:1.3.1",
+            coreKtx              : "androidx.core:core-ktx:1.6.0",
             navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
             navigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.navigation}",
             fragmentKtx          : "androidx.fragment:fragment-ktx:1.2.5",
-            constraintlayout     : "androidx.constraintlayout:constraintlayout:2.0.2",
+            constraintlayout     : "androidx.constraintlayout:constraintlayout:2.1.1",
+            activityx             : "androidx.activity:activity:1.2.4",
 
             //lifecycle
             lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",

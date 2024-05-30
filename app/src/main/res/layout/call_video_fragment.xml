@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextureView
+        android:id="@+id/texture_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <org.linphone.mediastream.video.capture.CaptureTextureView
+        android:id="@+id/video_preview"
+        android:layout_width="180dp"
+        android:layout_height="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="0dp"
+        android:layout_height="13dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp50" />
+
+    <com.communication.lib_core.ChatIconLayout
+        android:id="@+id/hang_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/rc_voip_hang_up"
+        app:icon_name="挂断"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number" />
+
+
+    <com.communication.lib_core.ChatIconLayout
+        android:id="@+id/micro"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        app:icon="@drawable/rc_voip_mute"
+        app:icon_name="静音"
+        app:layout_constraintBottom_toBottomOf="@+id/hang_up"
+        app:layout_constraintTop_toTopOf="@+id/hang_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/hang_up"
+        />
+
+
+    <ImageView
+        android:id="@+id/speaker"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/rc_voip_camera"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hang_up"
+        app:layout_constraintTop_toBottomOf="@+id/number" />
+
+
+    <TextView
+        android:id="@+id/camera_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭摄像头"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/micro"
+        app:layout_constraintEnd_toEndOf="@+id/micro"
+        app:layout_constraintTop_toBottomOf="@+id/micro" />
+
+    <com.communication.lib_core.ChatIconLayout
+        android:id="@+id/camera_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:icon="@drawable/rc_voip_camera"
+        app:icon_name="切换摄像头"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/hang_up"
+        app:layout_constraintTop_toTopOf="@+id/hang_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hang_up"
+
+        />
+
+    <TextView
+        android:id="@+id/switch_video_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="切换视频源"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/micro"
+        app:layout_constraintStart_toStartOf="@+id/micro"
+        app:layout_constraintBottom_toTopOf="@+id/micro"
+        app:layout_constraintTop_toBottomOf="@+id/number" />
+
+    <TextView
+        android:id="@+id/query_terminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询终端"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/speaker"
+        app:layout_constraintStart_toStartOf="@+id/speaker"
+        app:layout_constraintBottom_toTopOf="@+id/speaker"
+        app:layout_constraintTop_toBottomOf="@+id/number" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

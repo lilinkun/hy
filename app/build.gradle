@@ -3,16 +3,17 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-android-extensions'
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
 
     defaultConfig {
         applicationId "com.communication.pingyi"
-        minSdk 21
-        targetSdk 31
+        minSdk 25
+        targetSdk 33
         versionCode 7
         versionName "1.0.2"
 
@@ -69,6 +70,10 @@ android {
         dataBinding = true
     }
 
+    packagingOptions {
+        exclude 'META-INF/*'
+
+    }
 
 
 }
@@ -76,21 +81,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-
-    //linphone
-    debugImplementation 'org.linphone:linphone-sdk-android-debug:5.0.0'
-    releaseImplementation 'org.linphone:linphone-sdk-android:5.0.0'
-    implementation 'androidx.media:media:1.2.0'
-    //事件通讯
-    implementation 'org.greenrobot:eventbus:3.2.0'
-    implementation 'javax.websocket:javax.websocket-api:1.1'
-    implementation 'org.java-websocket:Java-WebSocket:1.5.2'
-    implementation 'org.springframework.security:spring-security-core:5.5.8'
-    implementation ('org.apache.httpcomponents:httpmime:4.3.5'){
-
-        exclude group: 'commons-logging', module: 'commons-logging'
-
-    }
 
     implementation rootProject.libs.stdlib
     implementation rootProject.androidx.coreKtx
@@ -102,6 +92,7 @@ dependencies {
     implementation rootProject.androidx.fragmentKtx
     implementation rootProject.androidx.navigationFragmentKtx
     implementation rootProject.androidx.navigationUIKtx
+    implementation rootProject.androidx.activityx
 
     //add Log
     implementation rootProject.libs.timber
@@ -116,6 +107,7 @@ dependencies {
     implementation rootProject.libs.koinViewModel
     implementation rootProject.libs.koinExt
 
+
     implementation rootProject.libs.eventBus
 
     implementation rootProject.libs.luban
@@ -128,17 +120,19 @@ dependencies {
     implementation rootProject.libs.glide
     kapt rootProject.libs.glideCompiler
 
+    implementation 'androidx.media:media:1.2.0'
 
     implementation rootProject.libs.perm
     kapt rootProject.libs.permkap
 
 //    debugImplementation rootProject.libs.leakcanary
-    api 'cn.rongcloud.sdk:im_kit:5.6.3' // 即时通讯 UI 基础组件
-    api 'cn.rongcloud.sdk:sight:5.6.3' // 小视频
-    api 'cn.rongcloud.sdk:call_lib:5.6.3' // 音视频呼叫能力库（内含 rtc_lib)
-    api 'cn.rongcloud.sdk:call_kit:5.6.3' // 音视频通话能力 UI 组件
+//    api 'cn.rongcloud.sdk:im_kit:5.6.3' // 即时通讯 UI 基础组件
+//    api 'cn.rongcloud.sdk:sight:5.6.3' // 小视频
+//    api 'cn.rongcloud.sdk:call_lib:5.6.3' // 音视频呼叫能力库（内含 rtc_lib)
+//    api 'cn.rongcloud.sdk:call_kit:5.6.3' // 音视频通话能力 UI 组件
     //json解析
     api 'com.google.code.gson:gson:2.8.2'
+
 
     implementation project(":lib_http")
     implementation project(":lib_core")

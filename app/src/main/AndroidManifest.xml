@@ -19,8 +19,17 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- 拍照等 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <!-- 录音权限，语音消息使用 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Android 11及以上版本使用以下权限 -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
 
 
     <application
@@ -71,7 +80,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.ChatAcitivity"
+        <activity android:name=".activity.ConversationAcitivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+
+        <activity android:name=".activity.VoiceAndVideoActivity"
             android:exported="false"/>
 
 

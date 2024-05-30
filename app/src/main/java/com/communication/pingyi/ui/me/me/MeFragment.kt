@@ -21,7 +21,6 @@ import com.google.gson.Gson
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import io.rong.imkit.RongIM
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -192,7 +191,6 @@ class MeFragment : BaseFragment<FragmentMeBinding>(), OnRefreshListener {
 
 
     private fun logoutConfirm() {
-        RongIM.getInstance().logout()
         MMKVTool.clearAll()
         val intent = Intent(context,LoginActivity::class.java)
         intent.putExtra("name","")

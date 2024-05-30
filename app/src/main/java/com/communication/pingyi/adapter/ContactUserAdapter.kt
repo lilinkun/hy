@@ -60,4 +60,5 @@ private class ContactUserDiffCallback : DiffUtil.ItemCallback<ContactUserBean>()
     override fun areContentsTheSame(oldItem: ContactUserBean, newItem: ContactUserBean): Boolean {
         return oldItem == newItem
     }
+
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_chat"
+    app:startDestination="@id/callIncomingFragment">
+
+    <fragment
+        android:id="@+id/callIncomingFragment"
+        android:name="com.communication.pingyi.ui.call.CallIncomingFragment"
+        android:label="CallIncomingFragment" >
+        <action
+            android:id="@+id/action_callIncomingFragment_to_callVoiceFragment"
+            app:destination="@id/callVoiceFragment" />
+        <action
+            android:id="@+id/action_callIncomingFragment_to_callVideoFragment"
+            app:destination="@id/callVideoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/callVoiceFragment"
+        android:name="com.communication.pingyi.ui.call.CallVoiceFragment"
+        android:label="CallVoiceFragment" >
+
+        <argument
+            android:name="number"
+            app:argType="string"/>
+        <argument
+            android:name="currentCall"
+            app:argType="integer"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/callVideoFragment"
+        android:name="com.communication.pingyi.ui.call.CallVideoFragment"
+        android:label="CallVideoFragment" >
+
+        <argument
+            android:name="number"
+            app:argType="string"/>
+
+    </fragment>
+</navigation>

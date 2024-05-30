@@ -100,6 +100,13 @@
     <string name="take_photo">拍照</string>
     <string name="take_video">拍视频</string>
 
+    <!--即时通讯-->
+    <string name="sip_voice">语音通话</string>
+    <string name="sip_video">视频通话</string>
+    <string name="tv_photo">相册</string>
+    <string name="tv_camare">拍摄</string>
+    <string name="tv_pos">位置</string>
+    <string name="exit_chat">取消</string>
 
     <!--事件-->
     <string name="instruct">指令</string>

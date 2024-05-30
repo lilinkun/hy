@@ -1,31 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="sendClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="addClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="voiceClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="videoClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="photoClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="camareClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="posClick"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/rc_background_main_color"
         android:orientation="vertical">
 
-        <io.rong.imkit.widget.refresh.SmartRefreshLayout
-            android:id="@+id/rc_refresh"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/rc_extension"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_message_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never" />
-        </io.rong.imkit.widget.refresh.SmartRefreshLayout>
+                android:layout_height="0dp"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toTopOf="@+id/input_layout"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="10dp"
+                tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/rc_new_message_number"
@@ -39,8 +65,9 @@
             android:textColor="#ffffff"
             android:textSize="12dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/rc_refresh"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/rc_message_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="UnknownId" />
 
         <TextView
             android:id="@+id/rc_unread_message_count"
@@ -85,16 +112,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <io.rong.imkit.conversation.extension.RongExtension
-            android:id="@+id/rc_extension"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rc_refresh" />
-
         <LinearLayout
             android:id="@+id/rc_notification_container"
             android:layout_width="match_parent"
@@ -104,6 +121,141 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            <!-- 输入框区域 -->
+            <RelativeLayout
+                android:id="@+id/input_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/picture_color_light_grey"
+                app:layout_constraintBottom_toTopOf="@id/functional_buttons_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/voice_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="@dimen/dp10"
+                    android:src="@drawable/rc_ext_toggle_voice"
+                    android:layout_centerVertical="true"
+                    />
+
+                <EditText
+                    android:id="@+id/message_input"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:hint="请输入消息"
+                    android:background="@drawable/bg_chat_edit"
+                    android:layout_margin="2dp"
+                    android:layout_toEndOf="@+id/voice_btn"
+                    android:layout_toStartOf="@+id/emoji_btn"
+                    android:layout_centerVertical="true"
+                    android:inputType="textMultiLine" />
+
+
+
+                <ImageView
+                    android:id="@+id/emoji_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/rc_ext_input_panel_emoji"
+                    android:layout_toStartOf="@+id/rl_send"
+                    android:layout_centerVertical="true"
+                    tools:ignore="DuplicateIds" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    >
+                    <ImageView
+                        android:id="@+id/add_button"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/rc_ext_input_panel_add"
+                        android:layout_marginEnd="@dimen/dp10"
+                        android:onClick="@{addClick}"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发送"
+                        android:textColor="@color/white"
+                        android:visibility="gone"
+                        android:background="@drawable/shape_contact_name"
+                        android:gravity="center"
+                        android:onClick="@{sendClick}"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- 功能按钮区域 -->
+            <GridLayout
+                android:id="@+id/functional_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:columnCount="4"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sip_voice"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{voiceClick}"
+                    app:drawableTopCompat="@drawable/ic_voice" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sip_video"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{videoClick}"
+                    app:drawableTopCompat="@drawable/ic_video" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_photo"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{photoClick}"
+                    app:drawableTopCompat="@drawable/ic_photo" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_camare"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{camareClick}"
+                    app:drawableTopCompat="@drawable/ic_camare" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_pos"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:onClick="@{posClick}"
+                    app:drawableTopCompat="@drawable/ic_pos" />
+            </GridLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

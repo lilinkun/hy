@@ -6,10 +6,13 @@ import android.view.View
 import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.core.view.forEachIndexed
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.communication.lib_core.PyMessageRed
 import com.communication.lib_core.tools.EVENTBUS_ALARM_CLICK
 import com.communication.lib_core.tools.EVENTBUS_APP_CLICK
+import com.communication.lib_core.tools.EVENTBUS_CHAT_INCOME
+import com.communication.lib_core.tools.EVENTBUS_CHAT_VOICE
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BOTTOM
 import com.communication.lib_core.tools.EVENTBUS_GROUP_CLICK
 import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
@@ -31,14 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
-import io.rong.imkit.manager.UnReadMessageManager
-import io.rong.imkit.userinfo.RongUserInfoManager
-import io.rong.imkit.userinfo.model.GroupUserInfo
-import io.rong.imkit.utils.RouteUtils
-import io.rong.imlib.model.Conversation
-import io.rong.imlib.model.ConversationIdentifier
-import io.rong.imlib.model.Group
-import io.rong.imlib.model.UserInfo
+import com.matt.linphonelibrary.core.EventMessage
 
 /**
  * Created by LG
@@ -58,87 +54,73 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         LiveEventBus.get(
             EVENTBUS_APP_CLICK,
             String::class.java
-        ).observe(this,{ key->
+        ).observe(this) { key ->
             key?.let {
                 goToWebActivity(it)
             }
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_MESSAGE_CLICK,
             String::class.java
-        ).observe(this,{ key->
+        ).observe(this) { key ->
             key?.let {
-                goToWebActivity(WEB_EVENT+it + "&flag=false")
+                goToWebActivity(WEB_EVENT + it + "&flag=false")
             }
-        })
+        }
         LiveEventBus.get(
             EVENTBUS_ALARM_CLICK,
             Int::class.java
-        ).observe(this,{ key->
+        ).observe(this) { key ->
             key?.let {
-                goToWebActivity(WEB_ALARM+it)
+                goToWebActivity(WEB_ALARM + it)
             }
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_UNREAD_MESSAGE,
             Int::class.java
-        ).observe(this,{
+        ).observe(this) {
             initMessage(it)
-        })
+        }
 
         LiveEventBus.get(
             EVENTBUS_GROUP_CLICK,
             String::class.java
-        ).observe(this,{
+        ).observe(this) {
 
             val targetId = it
             val bundle = Bundle()
-            val conversationIdentifier = ConversationIdentifier(Conversation.ConversationType.GROUP, targetId);
-            RouteUtils.routeToConversationActivity(context, conversationIdentifier, false, bundle)
-        })
+        }
 
 
         LiveEventBus.get(
             EVENTBUS_EVENT_BOTTOM,
             Boolean::class.java
-        ).observe(this,{
+        ).observe(this){
             if (it){
                 bottomNavBar.visibility = View.VISIBLE
             }else{
                 bottomNavBar.visibility = View.GONE
             }
-        })
-        val conversationType: Conversation.ConversationType = Conversation.ConversationType.PRIVATE
-        val groupConversationType: Conversation.ConversationType = Conversation.ConversationType.GROUP
+        }
 
-        var conversationTypes : MutableList<Conversation.ConversationType> = ArrayList()
-
-        conversationTypes.add(conversationType)
-        conversationTypes.add(groupConversationType)
-
-        UnReadMessageManager.getInstance().addObserver(conversationTypes.toTypedArray(),object : UnReadMessageManager.IUnReadMessageObserver{
-            override fun onCountChanged(count: Int) {
-
-                LiveEventBus.get(EVENTBUS_MESSAGE_BADGE).post(count)
-            }
-
-        })
+        LiveEventBus.get(
+            EVENTBUS_CHAT_INCOME,
+            EventMessage::class.java
+        ).observe(this){
+//            val dir = MainFragmentDirections.actionMainFragmentToCallIncomingFragment(it.message.callName,it.message.callIsVideo,it.message.callId)
+//            findNavController().navigate(dir)
+        }
 
 
-        RongUserInfoManager.getInstance().addUserDataObserver(object :RongUserInfoManager.UserDataObserver{
-            override fun onUserUpdate(info: UserInfo?) {
-
-            }
-
-            override fun onGroupUpdate(group: Group?) {
-            }
-
-            override fun onGroupUserInfoUpdate(groupUserInfo: GroupUserInfo?) {
-            }
-
-        })
+        LiveEventBus.get(
+            EVENTBUS_CHAT_VOICE,
+            EventMessage::class.java
+        ).observe(this){
+//            val dir = MainFragmentDirections.actionMainFragmentToCallVoiceFragment(it.message.callName,it.message.callId)
+//            findNavController().navigate(dir)
+        }
 
     }
 
@@ -146,11 +128,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         super.onStart()
 
 
-        LiveEventBus.get("message",Boolean::class.java).observe(this,{
+        LiveEventBus.get("message",Boolean::class.java).observe(this) {
 
             jumpCurrent()
 
-        })
+        }
     }
 
     override fun initView() {

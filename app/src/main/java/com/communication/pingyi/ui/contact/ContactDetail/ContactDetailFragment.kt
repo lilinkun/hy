@@ -1,6 +1,5 @@
 package com.communication.pingyi.ui.contact.ContactDetail
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,16 +8,10 @@ import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import com.communication.lib_http.httpdata.contact.ContactUserBean
 import com.communication.pingyi.R
-import com.communication.pingyi.activity.ChatAcitivity
 import com.communication.pingyi.base.BaseFragment
 import com.communication.pingyi.databinding.FragmentContactDetailBinding
 import com.communication.pingyi.ext.pyToast
 import com.google.gson.Gson
-import io.rong.callkit.RongCallKit
-import io.rong.imkit.utils.RouteUtils
-import io.rong.imlib.model.Conversation
-import io.rong.imlib.model.ConversationIdentifier
-import java.util.Locale
 
 class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
 
@@ -78,11 +71,7 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
 
             ivContactVoice.setOnClickListener {
                 if (!contactBean.sysUserName.isNullOrEmpty()) {
-                    RongCallKit.startSingleCall(
-                        activity,
-                        contactBean.sysUserName,
-                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_AUDIO
-                    );
+
                 }else{
                     pyToast("此人无即时通讯功能")
                 }
@@ -90,11 +79,7 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
 
             ivContactVideo.setOnClickListener {
                 if (!contactBean.sysUserName.isNullOrEmpty()) {
-                    RongCallKit.startSingleCall(
-                        activity,
-                        contactBean.sysUserName,
-                        RongCallKit.CallMediaType.CALL_MEDIA_TYPE_VIDEO
-                    );
+
                 }else{
                     pyToast("此人无即时通讯功能")
                 }
@@ -105,21 +90,7 @@ class ContactDetailFragment : BaseFragment<FragmentContactDetailBinding>(){
                 if (!contactBean.sysUserName.isNullOrEmpty()) {
                     val targetId = contactBean.sysUserName;
                     val bundle = Bundle()
-                    val conversationIdentifier = ConversationIdentifier(Conversation.ConversationType.PRIVATE, targetId);
 
-                    val intent: Intent = Intent(context, ChatAcitivity::class.java)
-                    intent.putExtra("targetId", conversationIdentifier.targetId)
-                    intent.putExtra(
-                        "ConversationType", conversationIdentifier.type.getName().lowercase(
-                            Locale.getDefault()
-                        )
-                    )
-                    intent.putExtra("ConversationIdentifier", conversationIdentifier)
-                    if (bundle != null) {
-                        intent.putExtras(bundle)
-                    }
-
-                    startActivity(intent)
 
 //                    RouteUtils.routeToConversationActivity(context, conversationIdentifier, false, bundle)
                 }else{

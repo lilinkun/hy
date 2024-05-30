@@ -2,9 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <import type="android.view.View"/>
+
+        <import type="com.communication.pingyi.tools.Converters"/>
+
+        <variable
+            name="message"
+            type="com.communication.pingyi.model.ConversationUserInfo" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/rc_conversation_item_height">
+        android:layout_height="@dimen/rc_conversation_item_height"
+        android:onClick="@{clickListener}">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,7 +40,8 @@
                 android:id="@+id/rc_conversation_portrait"
                 android:layout_width="@dimen/rc_conversation_portrait_size"
                 android:layout_height="@dimen/rc_conversation_portrait_size"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:src="@color/rc_secondary_color"/>
 
 
             <RelativeLayout
@@ -32,7 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:visibility="@{message.count == 0 ? View.GONE: View.VISIBLE}">
 
                 <ImageView
                     android:id="@+id/rc_conversation_unread_bg"
@@ -47,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="15"
+                    android:text="@{Converters.anyToString(message.count)}"
                     android:textColor="@color/rc_white_color"
                     android:textSize="@dimen/rc_font_auxiliary_size" />
             </RelativeLayout>
@@ -63,7 +81,7 @@
             android:layout_marginEnd="@dimen/rc_margin_size_12"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="张三"
+            android:text="@{Converters.anyToString(message.userName)}"
             android:textColor="@color/rc_text_main_color"
             android:textSize="@dimen/rc_font_secondary_size"
             app:layout_constraintEnd_toStartOf="@+id/rc_conversation_date"
@@ -80,7 +98,7 @@
             android:layout_marginEnd="60dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="你好，朋友！"
+            android:text="@{message.lastMessage}"
             android:textColor="@color/rc_secondary_color"
             android:textSize="@dimen/rc_font_text_third_size"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,21 +113,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rc_margin_size_16"
             android:layout_marginEnd="@dimen/rc_margin_size_12"
-            android:text="3 月 22 日"
+            android:text="@{message.updateTime}"
             android:textColor="@color/rc_auxiliary_color"
             android:textSize="@dimen/rc_font_nav_or_date_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/rc_conversation_no_disturb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/rc_margin_size_12"
-            android:layout_marginBottom="@dimen/rc_margin_size_12"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/rc_no_disturb" />
 
         <ImageView
             android:id="@+id/rc_conversation_read_receipt"

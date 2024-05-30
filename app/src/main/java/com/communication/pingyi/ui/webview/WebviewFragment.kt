@@ -57,10 +57,12 @@ class WebviewFragment : BaseFragment<FragmentWebviewBinding>() {
 
     private var mCustomView: View? = null //全屏渲染视频的View
 
-    private val homeUrl = "http://43.246.96.50:9883/#/"
-    private val homeUrl1 = "http://43.246.96.50:9883/#/index"
-//    private val homeUrl = "http://10.168.200.2:9883/#/"
-//    private val homeUrl1 = "http://10.168.200.2:9883/#/index"
+//    private val homeUrl = "http://43.246.96.50:9883/#/"
+//    private val homeUrl1 = "http://43.246.96.50:9883/#/index"
+    private val homeUrl = "http://10.168.200.2:9883/#/"
+    private val homeUrl1 = "http://10.168.200.2:9883/#/index"
+//    private val homeUrl = "http://222.243.225.18:9883/#/"
+//    private val homeUrl1 = "http://222.243.225.18:9883/#/index"
 
     var type : Int = 0
 

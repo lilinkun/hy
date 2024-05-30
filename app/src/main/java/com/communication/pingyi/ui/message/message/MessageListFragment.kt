@@ -1,3 +1,4 @@
+/*
 package com.communication.pingyi.ui.message.message
 
 import android.content.Intent
@@ -65,4 +66,4 @@ class MessageListFragment : ConversationListFragment() {
         }
     }
 
-}
+}*/

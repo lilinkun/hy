@@ -18,20 +18,23 @@ import java.util.concurrent.TimeUnit
  * Description：
  */
 
-const val SERVER_BASE_URL = "http://43.246.96.51:8080"
-//const val SERVER_BASE_URL = "http://10.168.200.3:8080"
+//const val SERVER_BASE_URL = "http://43.246.96.51:8080"
+//const val SERVER_BASE_URL = "http://222.243.225.18:8081"
+const val SERVER_BASE_URL = "http://10.168.200.3:8080"
 
 //const val WEB_EVENT = "http://192.168.1.204:8088/#/event/overview"
 //const val WEB_RUNTIME = "http://192.168.1.204:8088/#/runtime/overview"
 //const val WEB_MESSAGE = "http://192.168.1.204:8088/#/event/detail?id="
 //const val WEB_EVENT = "http://192.168.40.94:8080/#/event/overview"
-//const val WEB_RUNTIME = "http://192.168.40.94:8080/#/runtime/overview"
+const val WEB_RUNTIME = "http://192.168.40.94:8080/#/runtime/overview"
 //const val WEB_MESSAGE = "http://192.168.40.94:8080/#/event/detail?id="
-const val WEB_EVENT = "http://43.246.96.50:9883/#/eventAssignDetails?eventId="
-//const val WEB_EVENT = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
-const val WEB_ALARM = "http://43.246.96.50:9883/#/alarmDetial?id="
-//const val WEB_ALARM = "http://10.168.200.2:9883/#/alarmDetial?id="
-const val WEB_RUNTIME = "http://192.168.40.141:8200/#/runtime/overview"
+//const val WEB_EVENT = "http://43.246.96.50:9883/#/eventAssignDetails?eventId="
+const val WEB_EVENT = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
+//const val WEB_EVENT = "http://222.243.225.18:9883/#/eventAssignDetails?eventId="
+//const val WEB_ALARM = "http://43.246.96.50:9883/#/alarmDetial?id="
+const val WEB_ALARM = "http://10.168.200.2:9883/#/alarmDetial?id="
+//const val WEB_ALARM = "http://222.243.225.18:9883/#/alarmDetial?id="
+//const val WEB_RUNTIME = "http://192.168.40.141:8200/#/runtime/overview"
 //const val WEB_MESSAGE = "http://192.168.120.40:9000/#/eventAssignDetails?eventId="
 //const val WEB_MESSAGE = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
 
