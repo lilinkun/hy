@@ -123,6 +123,12 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 LiveEventBus.get(EVENTBUS_SEND_MESSAGE,Int::class.java).post(2)
             }
 
+            setColumnClick {
+                functionalButtonsLayout.visibility = View.GONE
+
+                binding.voiceBtn.setImageResource(R.drawable.rc_ext_toggle_keyboard)
+            }
+
         }
 
 
