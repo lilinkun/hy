@@ -1,5 +1,6 @@
 package com.communication.pingyi.model
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
@@ -22,3 +23,6 @@ data class ConversationMsgList(
     val sendTime: Long,
     val userName: String
 ) : Parcelable
+
+data class VoiceContent(val voiceAnimation : AnimationDrawable, val url : String)
+

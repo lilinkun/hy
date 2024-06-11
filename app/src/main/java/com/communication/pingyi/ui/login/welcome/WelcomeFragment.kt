@@ -22,9 +22,9 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(){
 
     override fun getLayoutResId(): Int = R.layout.fragment_welcome
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onStart() {
             super.onStart()

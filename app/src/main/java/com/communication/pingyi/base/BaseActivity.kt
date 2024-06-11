@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.communication.lib_core.tools.StatusBarUtil
 import java.util.ArrayList
 
@@ -16,7 +17,9 @@ import java.util.ArrayList
  * on 2022/3/14  11:22
  * Description：
  */
+const val REQUEST_WRITE_EXTERNAL_STORAGE = 0X12
 open class BaseActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,7 @@ open class BaseActivity : AppCompatActivity() {
             )
             for (perm in permissions) {
                 if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        PackageManager.PERMISSION_GRANTED != checkSelfPermission(perm)
+                        PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(this,perm)
                     } else {
                         TODO("VERSION.SDK_INT < M")
                     }
@@ -57,7 +60,7 @@ open class BaseActivity : AppCompatActivity() {
             if (permissionsList.isNotEmpty()) {
                 val strings = arrayOfNulls<String>(permissionsList.size)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(permissionsList.toArray(strings), 0)
+                    ActivityCompat.requestPermissions(this,permissionsList.toArray(strings), REQUEST_WRITE_EXTERNAL_STORAGE)
                 }
             }
         }

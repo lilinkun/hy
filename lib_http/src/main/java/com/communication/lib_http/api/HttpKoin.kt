@@ -38,6 +38,9 @@ const val WEB_ALARM = "http://10.168.200.2:9883/#/alarmDetial?id="
 //const val WEB_MESSAGE = "http://192.168.120.40:9000/#/eventAssignDetails?eventId="
 //const val WEB_MESSAGE = "http://10.168.200.2:9883/#/eventAssignDetails?eventId="
 
+const val CHAT_IP = "47.112.12.5"
+const val CHAT_PORT = 6050
+
 const val TIME_OUT = 15L
 
 var mBaseModel: BaseModel<Int>? = null

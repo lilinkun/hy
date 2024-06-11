@@ -9,3 +9,5 @@ data class SearchUserBean(
     val fullPathDept : String,
     val addressUser : ContactUserBean
 )
+
+data class ExpressionBean(val expressionId: Int, val expressionName: String)

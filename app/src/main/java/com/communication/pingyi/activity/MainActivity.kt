@@ -1,42 +1,32 @@
 package com.communication.pingyi.activity
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import android.view.View
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.alibaba.fastjson.JSON
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
+import com.alibaba.fastjson.JSONObject
 import com.communication.lib_core.HyAppDialog
+import com.communication.lib_core.tools.Constance.Companion.CHAT_ACCOUNT
 import com.communication.lib_core.tools.EVENTBUS_CHATLISTUSER
 import com.communication.lib_core.tools.EVENTBUS_CHATLOGIN
 import com.communication.lib_core.tools.EVENTBUS_CHAT_CONNECT
 import com.communication.lib_core.tools.EVENTBUS_CHAT_FINISH
-import com.communication.lib_core.tools.EVENTBUS_CHAT_INCOME
-import com.communication.lib_core.tools.EVENTBUS_CHAT_INCOMEEND
 import com.communication.lib_core.tools.EVENTBUS_CHAT_MESSAGE
-import com.communication.lib_core.tools.EVENTBUS_CHAT_VIDEO
-import com.communication.lib_core.tools.EVENTBUS_CHAT_VOICE
 import com.communication.lib_core.tools.EVENTBUS_EVENT_BACK
 import com.communication.lib_core.tools.EVENTBUS_GETMSGLIST
 import com.communication.lib_core.tools.EVENTBUS_GROUP_MEMBER
 import com.communication.lib_core.tools.EVENTBUS_GROUP_NAME
 import com.communication.lib_core.tools.EVENTBUS_LOGIN_FAIL
-import com.communication.lib_core.tools.EVENTBUS_MESSAGE_BADGE
 import com.communication.lib_core.tools.EVENTBUS_TOKEN_INVALID
 import com.communication.lib_core.tools.EVENTBUS_USER_INFO
 import com.communication.lib_core.tools.Utils
+import com.communication.lib_http.api.CHAT_IP
+import com.communication.lib_http.api.CHAT_PORT
 import com.communication.lib_http.api.mBaseModel
 import com.communication.lib_http.base.MMKVTool
 import com.communication.lib_http.httpdata.login.LoginInfo
@@ -45,15 +35,14 @@ import com.communication.lib_http.httpdata.message.GroupName
 import com.communication.lib_http.httpdata.message.MemberItem
 import com.communication.pingyi.R
 import com.communication.pingyi.base.BaseActivity
+import com.communication.pingyi.base.REQUEST_WRITE_EXTERNAL_STORAGE
 import com.communication.pingyi.ext.pyToast
-import com.communication.pingyi.ext.pyToastShort
 import com.communication.pingyi.model.ConversationMsgList
 import com.communication.pingyi.model.ConversationUserInfo
 import com.communication.pingyi.model.ConversationUserListBean
 import com.communication.pingyi.tools.ActivityUtil
 import com.communication.pingyi.ui.login.account.LoginViewModel
 import com.communication.pingyi.ui.main.MainFragment
-import com.communication.pingyi.ui.main.MainFragmentDirections
 import com.communication.pingyi.ui.message.message.ChatViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -72,7 +61,6 @@ import java.lang.reflect.Type
 
 
 class MainActivity : BaseActivity() {
-
 
     lateinit var sipManager: SIPManager
     lateinit var imManager: ImManager
@@ -186,7 +174,8 @@ class MainActivity : BaseActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun recieveMsg(recieveMsg: RecieveMsg){
         Log.i("recieveMsg", "recieveMsg: " +JSON.toJSONString(recieveMsg));
-        if (JSON.parseObject(recieveMsg.msg).get("code") == 2){
+        val jsonObject = JSONObject.parseObject(recieveMsg.msg)
+        if (jsonObject.getInteger("code") == 2){
             LiveEventBus.get(EVENTBUS_CHAT_MESSAGE,Boolean::class.java).post(true)
         }
     }
@@ -221,12 +210,21 @@ class MainActivity : BaseActivity() {
             }
 
         }.launch(
-            arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
-            )
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S){
+                arrayOf(
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.RECORD_AUDIO
+                )
+            }else {
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.RECORD_AUDIO
+                )
+            }
         )
 
 
@@ -260,11 +258,11 @@ class MainActivity : BaseActivity() {
         }
 
 
-        var imManager : ImManager = ImManager.getInstance()
+        imManager = ImManager.getInstance()
 
 
         LiveEventBus.get(EVENTBUS_USER_INFO,PersonInfoBean::class.java).observe(this) {
-
+//            connectIM("12")
             it?.imToken?.let { it1 -> connectIM(it1) }
             getMessage()
 //            connectIM("EZwwh9PYPQZpQnuF2rVycVuWn8ZzuNtuEfJoG4gGsUA=@yx9p.cn.rongnav.com;yx9p.cn.rongcfg.com")
@@ -315,9 +313,9 @@ class MainActivity : BaseActivity() {
 
 
     private fun connectIM(token : String){
-
-        sipManager.register("8951", "12345", "47.112.12.5",6050, 0)
-        imManager.login("47.112.12.5","8951","12345");
+        CHAT_ACCOUNT = token
+        sipManager.register(token, "12345", CHAT_IP,CHAT_PORT, 0)
+        imManager.login(CHAT_IP,token,"12345");
 
         /*val timeLimit : Int = 1000
         RongIM.connect(token, timeLimit, object : RongIMClient.ConnectCallback(){
@@ -409,5 +407,22 @@ class MainActivity : BaseActivity() {
 
 
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            REQUEST_WRITE_EXTERNAL_STORAGE ->{
+//                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                    pyToast("已申请权限")
+//                }else{
+//                    pyToast("申请权限失败")
+//                }
+            }
+        }
     }
 }

@@ -33,7 +33,9 @@ class SpalashFragment : Fragment(){
 
 
         private fun navigateToWelcome(){
-            val dir = SpalashFragmentDirections.actionSpalashFragmentToWelcomeFragment()
-            findNavController().navigate(dir)
+                val dir = SpalashFragmentDirections.actionSpalashFragmentToWelcomeFragment()
+                dir.let {
+                    findNavController().navigate(it)
+                }
         }
 }

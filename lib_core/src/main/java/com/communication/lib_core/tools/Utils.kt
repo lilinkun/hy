@@ -4,11 +4,17 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import android.text.Html
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.ObjectInputStream
@@ -144,5 +150,51 @@ object Utils {
         val obj = objectInputStream.readObject() as? Serializable
         objectInputStream.close()
         return obj
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun convertHtmlToSpannable(htmlContent: String, context : Context): Spannable {
+        val spannableBuilder = SpannableStringBuilder()
+
+        val htmlSpanned = Html.fromHtml(htmlContent, Html.FROM_HTML_MODE_COMPACT, object : Html.ImageGetter {
+            override fun getDrawable(source: String?): Drawable? {
+                return source?.let {
+                    val localResourcePath = convertImagePathToLocalResource(it)
+                    val resourceId = getResourceIdFromSource(localResourcePath,context)
+                    val drawable = resourceId?.let { resId -> ContextCompat.getDrawable(context, resId) }
+                    drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+                    drawable
+                }
+            }
+        }, null)
+
+        spannableBuilder.append(htmlSpanned)
+
+        return spannableBuilder
+    }
+
+    fun convertImagePathToLocalResource(imagePath: String): String {
+        // 从路径中提取文件名
+        val file = imagePath.substringAfterLast("/")
+        var fileName = file.split(".")[0]
+        if (!fileName.contains("emoji")){
+            fileName = "emoji_" + fileName
+        }
+        // 构建本地资源路径
+        return "R.raw.$fileName"
+    }
+
+    fun getResourceIdFromSource(source: String,context: Context): Int? {
+        // 根据资源路径获取对应的资源 ID
+        return try {
+            val fieldName = source.substringAfterLast(".")
+            val packageName = context.packageName
+            val clazz = Class.forName(packageName + ".R\$raw")
+            val field = clazz.getField(fieldName)
+            field.getInt(null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 }

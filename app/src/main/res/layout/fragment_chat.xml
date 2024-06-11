@@ -37,6 +37,14 @@
             name="columnClick"
             type="android.view.View.OnClickListener" />
 
+        <variable
+            name="emojiClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="layoutClick"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
 
@@ -55,6 +63,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/input_layout"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="10dp"
+                android:onClick="@{layoutClick}"
                 tools:ignore="MissingConstraints" />
 
         <TextView
@@ -67,7 +76,7 @@
             android:gravity="center"
             android:paddingBottom="5dp"
             android:textColor="#ffffff"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/rc_message_list"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,9 +99,9 @@
             android:textColor="@color/rc_text_main_color"
             android:textSize="14sp"
             android:visibility="gone"
-            android:drawableStart="@drawable/rc_unread_msg_arrow"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/rc_unread_msg_arrow" />
 
         <TextView
             android:id="@+id/rc_mention_message_count"
@@ -112,9 +121,9 @@
             android:textColor="@color/rc_text_main_color"
             android:textSize="14sp"
             android:visibility="gone"
-            android:drawableStart="@drawable/rc_unread_msg_arrow"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/rc_unread_msg_arrow" />
 
         <LinearLayout
             android:id="@+id/rc_notification_container"
@@ -135,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/picture_color_light_grey"
-                app:layout_constraintBottom_toTopOf="@id/functional_buttons_layout"
+                app:layout_constraintBottom_toTopOf="@+id/functional_buttons_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -167,6 +176,7 @@
                     android:paddingStart="@dimen/dp10" />
 
                 <TextView
+                    android:id="@+id/tv_voice_btn"
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
@@ -178,6 +188,7 @@
                     android:layout_toEndOf="@+id/voice_btn"
                     android:background="@drawable/bg_chat_edit"
                     android:text="按住说话"
+                    android:visibility="gone"
                     android:textColor="#222222"
                     android:gravity="center"
                     android:inputType="textMultiLine"
@@ -192,7 +203,8 @@
                     android:src="@drawable/rc_ext_input_panel_emoji"
                     android:layout_toStartOf="@+id/rl_send"
                     android:layout_centerVertical="true"
-                    tools:ignore="DuplicateIds" />
+                    tools:ignore="DuplicateIds"
+                    android:onClick="@{emojiClick}"/>
 
                 <RelativeLayout
                     android:id="@+id/rl_send"
@@ -201,14 +213,15 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     >
+
                     <ImageView
                         android:id="@+id/add_button"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/rc_ext_input_panel_add"
+                        android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/dp10"
                         android:onClick="@{addClick}"
-                        />
+                        android:src="@drawable/rc_ext_input_panel_add" />
 
                     <TextView
                         android:id="@+id/tv_send"
@@ -217,26 +230,34 @@
                         android:text="发送"
                         android:textColor="@color/white"
                         android:visibility="gone"
+                        android:padding="@dimen/dp5"
+                        android:textSize="16sp"
                         android:background="@drawable/shape_contact_name"
                         android:gravity="center"
                         android:onClick="@{sendClick}"
+                        android:layout_centerInParent="true"
                         />
 
                 </RelativeLayout>
 
             </RelativeLayout>
 
-            <!-- 功能按钮区域 -->
-            <GridLayout
+            <RelativeLayout
                 android:id="@+id/functional_buttons_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:columnCount="4"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+            <!-- 功能按钮区域 -->
+            <GridLayout
+                android:id="@+id/gl_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:columnCount="4"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="0dp"
@@ -281,6 +302,16 @@
                     app:drawableTopCompat="@drawable/ic_pos" />
             </GridLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_expression"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

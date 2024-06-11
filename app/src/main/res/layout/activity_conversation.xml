@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.communication.pingyi.activity.ConversationAcitivity">
 
-    <fragment
+<!--    <fragment-->
+<!--        android:id="@+id/conversation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:name="com.communication.pingyi.ui.message.message.ChatFragment"-->
+<!--        />-->
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/conversation"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.communication.pingyi.ui.message.message.ChatFragment"
-        />
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_conversation" />
 
 </LinearLayout>

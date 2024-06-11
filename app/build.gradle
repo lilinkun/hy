@@ -116,6 +116,9 @@ dependencies {
     implementation rootProject.libs.refresh         //核心必须依赖
     implementation rootProject.libs.refreshHeader    //经典加载
 
+    //lottie 动画
+    implementation 'com.airbnb.android:lottie:3.7.0'
+
     //add image cache
     implementation rootProject.libs.glide
     kapt rootProject.libs.glideCompiler

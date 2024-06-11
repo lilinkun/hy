@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_conversation"
+    app:startDestination="@id/chatFragment">
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.communication.pingyi.ui.message.message.ChatFragment"
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_chatGroupDetailFragment"
+            app:destination="@id/chatGroupDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatGroupDetailFragment"
+        android:name="com.communication.pingyi.ui.message.message.ChatGroupDetailFragment"
+        android:label="ChatGroupDetailFragment" />
+</navigation>

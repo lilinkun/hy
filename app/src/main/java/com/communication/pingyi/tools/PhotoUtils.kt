@@ -173,6 +173,20 @@ object PhotoUtils {
         }
     }
 
+    /**
+     * 打开相册
+     * @param context Activity
+     */
+    fun startAlbum(context: Activity) {
+        val albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        albumIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        albumIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
+
+        albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*,video/*")
+        context.startActivityForResult(albumIntent, RESULT_CODE_PHOTO)
+
+    }
+
     abstract class OnPictureCompressListener {
         fun onStart() {}
         abstract fun onSuccess(file: File)

@@ -11,5 +11,6 @@ class Constance {
         var checkInUseAndroidSystemTime = false
         var appFolderName = "pingyi"
         var appFolderApkName = "pingyi"
+        var CHAT_ACCOUNT = "8954"
     }
 }

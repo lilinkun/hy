@@ -98,7 +98,6 @@
             android:layout_marginEnd="60dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="@{message.lastMessage}"
             android:textColor="@color/rc_secondary_color"
             android:textSize="@dimen/rc_font_text_third_size"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +126,6 @@
             android:layout_marginBottom="@dimen/rc_margin_size_12"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rc_conversation_no_disturb"
             app:layout_goneMarginEnd="@dimen/rc_margin_size_12"
             android:src="@drawable/rc_read_receipt" />
 

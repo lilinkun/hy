@@ -41,6 +41,39 @@
         app:layout_constraintTop_toBottomOf="@id/c_selected"
         app:layout_goneMarginTop="@dimen/rc_margin_size_20" />
 
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="70dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/rc_margin_size_8"
+        android:layout_marginEnd="@dimen/rc_margin_size_8"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@drawable/bg_chat_me"
+        app:layout_constraintEnd_toStartOf="@id/c_right_portrait"
+        app:layout_constraintTop_toTopOf="@+id/c_right_portrait"
+        app:layout_constraintBottom_toBottomOf="@+id/c_right_portrait">
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/iv_voice"
+            />
+
+        <ImageView
+            android:id="@+id/iv_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/rc_voice_send_play3"
+            />
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/ll_content"
         android:layout_width="wrap_content"
@@ -73,8 +106,24 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:gravity="end"
+            android:visibility="gone"
+            android:paddingStart="@dimen/dp10"
+            android:paddingEnd="@dimen/dp10"
+            android:paddingTop="@dimen/dp5"
+            android:paddingBottom="@dimen/dp5"
+            android:background="@drawable/bg_chat_me"
             android:textColor="@color/rc_secondary_color"
-            android:textSize="@dimen/rc_font_text_third_size" />
+            android:textSize="@dimen/rc_margin_size_16" />
+
+        <ImageView
+            android:id="@+id/ic_content"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:ellipsize="end"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:gravity="end"
+            />
 
     </LinearLayout>
 

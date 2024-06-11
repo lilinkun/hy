@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.communication.lib_core.checkDoubleClick
 import com.communication.lib_core.tools.EVENTBUS_CONTACT_USER_CLICK
+import com.communication.lib_core.tools.Utils
 import com.communication.pingyi.databinding.ItemChatListBinding
 import com.communication.pingyi.model.ConversationUserInfo
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -50,6 +51,10 @@ class UserListAdapter : ListAdapter<ConversationUserInfo, RecyclerView.ViewHolde
         fun bind(item: ConversationUserInfo, position: Int) {
             binding.apply {
                 message = item
+
+                val sp = Utils.convertHtmlToSpannable(item.lastMessage, itemView.context)
+
+                rcConversationContent.text = sp
                 setClickListener {
                     if (checkDoubleClick()) {
                         LiveEventBus.get(EVENTBUS_CONTACT_USER_CLICK).post(item)

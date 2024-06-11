@@ -48,22 +48,33 @@
         android:layout_marginStart="@dimen/rc_margin_size_8"
         android:layout_marginEnd="@dimen/rc_margin_size_8"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         app:layout_constraintStart_toEndOf="@id/c_left_portrait"
         app:layout_constraintTop_toBottomOf="@id/c_time">
 
+        <ImageView
+            android:id="@+id/ic_content"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:ellipsize="end"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:gravity="end"
+            />
         <TextView
             android:id="@+id/c_title"
             style="@style/TextStyle.Alignment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:visibility="gone"
             android:singleLine="true"
             android:textColor="@color/rc_secondary_color"
             android:textSize="@dimen/rc_font_text_third_size" />
 
         <LinearLayout
             android:id="@+id/c_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -125,6 +136,27 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_content"
+        style="@style/TextStyle.Alignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:gravity="start"
+        android:paddingStart="@dimen/dp10"
+        android:paddingEnd="@dimen/dp10"
+        android:paddingTop="@dimen/dp2"
+        android:paddingBottom="@dimen/dp2"
+        android:background="@drawable/bg_chat_other"
+        android:textColor="@color/rc_secondary_color"
+        app:layout_constraintTop_toTopOf="@+id/c_left_portrait"
+        app:layout_constraintStart_toEndOf="@+id/c_left_portrait"
+        android:layout_marginStart="@dimen/dp10"
+        android:textSize="@dimen/rc_font_text_third_size"/>
+
 
     <View
         android:id="@+id/c_v_edit"

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.communication.lib_core.tools.EVENTBUS_CHATLISTUSER
 import com.communication.lib_core.tools.EVENTBUS_CHATLOGIN
+import com.communication.lib_core.tools.EVENTBUS_CHAT_MESSAGE
 import com.communication.lib_core.tools.EVENTBUS_CONTACT_USER_CLICK
 import com.communication.lib_http.base.MMKVTool
 import com.communication.pingyi.R
@@ -54,6 +55,13 @@ class MessageFragment : BaseFragment<FragmentMessagelistBinding>(){
                 var intent = Intent(activity,ConversationAcitivity::class.java)
                 intent.putExtras(bundle)
                 this.startActivity(intent)
+        }
+
+        LiveEventBus.get(EVENTBUS_CHAT_MESSAGE,Boolean::class.java).observe(this){
+            if (it){
+                var imManager: ImManager = ImManager.getInstance()
+                imManager.getUserList()
+            }
         }
 
     }
